@@ -1,20 +1,18 @@
 /* eslint-disable prettier/prettier */
 import {View, StyleSheet} from 'react-native';
 import React, {FC, useState} from 'react';
-import {
-  Heading,
-  Button,
-  Input,
-  IconButton,
-  WarningIcon,
-  ArrowUpIcon,
-} from 'native-base';
+import {Heading, Button, Input} from 'native-base';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export interface ILoginProps {}
+// TODO - Add type for navigation
+export interface ILoginProps {
+  navigation: any;
+}
 
-const Login: FC<ILoginProps> = props => {
+const Login: FC<ILoginProps> = ({navigation}) => {
   const [show, setShow] = useState<boolean>(false);
+
   return (
     <SafeAreaView>
       <View style={styles.login}>
@@ -33,12 +31,11 @@ const Login: FC<ILoginProps> = props => {
               type={show ? 'text' : 'password'}
               placeholder="Password"
               InputRightElement={
-                <IconButton
+                <Icon
+                  name={show ? 'eye-slash' : 'eye'}
                   onPress={() => setShow(!show)}
-                  variant="unstyled"
-                  colorScheme="primary">
-                  {show ? <WarningIcon /> : <ArrowUpIcon />}
-                </IconButton>
+                  size={30}
+                />
               }
             />
           </View>
@@ -47,7 +44,9 @@ const Login: FC<ILoginProps> = props => {
           <Button variant="unstyled">Forgot your password?</Button>
         </View>
         <View>
-          <Button variant="solid">Login</Button>
+          <Button variant="solid" onPress={() => navigation.navigate('OTP')}>
+            Login
+          </Button>
         </View>
         <View>
           <Button variant="unstyled">Don't have an account? Sign up</Button>
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
   header: {
     display: 'flex',
     alignItems: 'center',
-  }
+  },
 });
 
 export default Login;
