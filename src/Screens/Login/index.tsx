@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {View, StyleSheet} from 'react-native';
 import React, {FC, useState} from 'react';
-import {Heading, Button, Input} from 'native-base';
+import {Input, Button, Heading} from 'native-base';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -44,12 +44,14 @@ const Login: FC<ILoginProps> = ({navigation}) => {
           <Button variant="unstyled">Forgot your password?</Button>
         </View>
         <View>
-          <Button variant="solid" onPress={() => navigation.navigate('OTP')}>
-            Login
-          </Button>
+          <Button variant="solid">Login</Button>
         </View>
         <View>
-          <Button variant="unstyled">Don't have an account? Sign up</Button>
+          <Button
+            variant="unstyled"
+            onPress={() => navigation.navigate('Register')}>
+            Don't have an account? Sign up
+          </Button>
         </View>
       </View>
     </SafeAreaView>

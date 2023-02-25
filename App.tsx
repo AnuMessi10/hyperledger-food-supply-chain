@@ -12,6 +12,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import OTP from './src/Screens/Login/OTP';
+import Register from './src/Screens/Registration';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ const App: FC = () => {
               options={{headerShown: false}}
             />
             <Stack.Screen name="OTP" component={OTP} />
+            <Stack.Screen name="Register" component={Register} />
           </Stack.Navigator>
         </NativeBaseProvider>
       </SafeAreaProvider>
