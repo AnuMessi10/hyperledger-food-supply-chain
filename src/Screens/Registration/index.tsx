@@ -1,15 +1,14 @@
-/* eslint-disable prettier/prettier */
 import {StyleSheet, View} from 'react-native';
 import {Button, Input} from 'native-base';
 import React, {FC, useState, useContext} from 'react';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 
-import AuthContext from '../../../Navigation/AuthContext';
+import AuthContext from '../../Navigation/AuthContext';
 export interface IRegistrationProps {
   navigation: NativeStackNavigationHelpers;
 }
 
-const Register: FC<IRegistrationProps> = ({navigation}) => {
+const Registration: FC<IRegistrationProps> = ({navigation}) => {
   const [formFields, setFormFields] = useState<{
     name?: string;
     mobile?: number;
@@ -101,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Register;
+export default Registration;

@@ -1,11 +1,10 @@
-/* eslint-disable prettier/prettier */
 import {createContext} from 'react';
 
 const AuthContext = createContext<{
-  mobile: number,
-  setMobile: React.Dispatch<React.SetStateAction<{}>>
+  mobile: number;
+  setMobile: React.Dispatch<React.SetStateAction<number>>;
 }>({
-  mobile: 10012,
+  mobile: -1,
   setMobile: () => {},
 });
 

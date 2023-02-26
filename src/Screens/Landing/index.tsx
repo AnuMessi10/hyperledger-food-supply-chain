@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-import { Text } from 'native-base';
+import {Text} from 'native-base';
 import React, {FC} from 'react';
 import {View} from 'react-native';
 

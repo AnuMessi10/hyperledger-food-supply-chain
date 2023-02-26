@@ -1,9 +1,8 @@
-/* eslint-disable prettier/prettier */
 import {View, SafeAreaView} from 'react-native';
 import React, {FC, useState, useContext} from 'react';
 import {Button, Text} from 'native-base';
 import OtpInputs from 'react-native-otp-inputs';
-import AuthContext from '../../../Navigation/AuthContext';
+import AuthContext from '../../Navigation/AuthContext';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 
 export interface IOTPProps {
@@ -27,7 +26,7 @@ const OTP: FC<IOTPProps> = ({navigation}) => {
       }),
     })
       .then(async response => {
-        const data = (await response.json());
+        const data = await response.json();
         // console.log(data, typeof data, data.type);
         if (data.type === 'success') {
           navigation.navigate('Landing');
