@@ -1,10 +1,12 @@
 /* eslint-disable prettier/prettier */
 import {StyleSheet, View} from 'react-native';
 import {Button, Input} from 'native-base';
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useContext} from 'react';
+import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 
+import AuthContext from '../../../Navigation/AuthContext';
 export interface IRegistrationProps {
-  navigation: any;
+  navigation: NativeStackNavigationHelpers;
 }
 
 const Register: FC<IRegistrationProps> = ({navigation}) => {
@@ -14,8 +16,10 @@ const Register: FC<IRegistrationProps> = ({navigation}) => {
     password?: string;
   }>({});
 
+  const {setMobile} = useContext(AuthContext);
+
   const handleRegistration = () => {
-    console.log(formFields);
+    formFields.mobile && setMobile(formFields.mobile);
     fetch('http://localhost:5000/api/auth/register', {
       method: 'POST',
       headers: {
@@ -31,6 +35,7 @@ const Register: FC<IRegistrationProps> = ({navigation}) => {
       .catch(error => {
         console.error(error);
       });
+    navigation.navigate('OTP');
   };
 
   const handleInputChange = (
