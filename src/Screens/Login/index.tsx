@@ -12,6 +12,30 @@ export interface ILoginProps {
 const Login: FC<ILoginProps> = ({navigation}) => {
   const [show, setShow] = useState<boolean>(false);
 
+  const [formFields, setFormFields] = useState<{
+    mobile?: number;
+    password?: string;
+  }>({});
+
+  const handleLogin = () => {
+    fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formFields),
+    })
+      .then(response => response.json())
+      .then(json => {
+        return json;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    navigation.navigate('Landing');
+  };
+
   return (
     <SafeAreaView>
       <View style={styles.login}>
@@ -23,6 +47,12 @@ const Login: FC<ILoginProps> = ({navigation}) => {
             <Input
               type={'text'}
               placeholder="Enter your registered mobile number"
+              onChangeText={mobile => {
+                setFormFields({
+                  ...formFields,
+                  mobile: Number(mobile) ?? 1001,
+                });
+              }}
             />
           </View>
           <View style={styles.input}>
@@ -36,6 +66,12 @@ const Login: FC<ILoginProps> = ({navigation}) => {
                   size={30}
                 />
               }
+              onChangeText={password => {
+                setFormFields({
+                  ...formFields,
+                  password: password,
+                });
+              }}
             />
           </View>
         </View>
@@ -43,7 +79,9 @@ const Login: FC<ILoginProps> = ({navigation}) => {
           <Button variant="unstyled">Forgot your password?</Button>
         </View>
         <View>
-          <Button variant="solid">Login</Button>
+          <Button variant="solid" onPress={() => handleLogin()}>
+            Login
+          </Button>
         </View>
         <View>
           <Button
