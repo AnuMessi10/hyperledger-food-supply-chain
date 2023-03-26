@@ -16,7 +16,7 @@ import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/t
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {REQUIRED_FIELD_MESSAGE} from '../../Constants';
-import {launchCamera} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 export interface CreateProductProps {
   navigation: NativeStackNavigationHelpers;
@@ -34,14 +34,23 @@ const createProductSchema = object({
 
 const CreateProduct: FC<CreateProductProps> = () => {
   const getProductImage = async (handleChange: any) => {
-    await launchCamera({
+    let result = await launchImageLibrary({
       mediaType: 'photo',
-    })
-      .then(result => {
-        result.assets && handleChange(result.assets[0].uri);
-        console.log(result);
-      })
-      .catch(err => console.error(err));
+    });
+
+    if (!result.didCancel) {
+      if (result.assets !== undefined) {
+        handleChange(result.assets[0].uri);
+      }
+    }
+    // await launchCamera({
+    //   mediaType: 'photo',
+    // })
+    //   .then(result => {
+    //     result.assets && handleChange(result.assets[0].uri);
+    //     console.log(result);
+    //   })
+    //   .catch(err => console.error(err));
   };
 
   return (
@@ -63,7 +72,7 @@ const CreateProduct: FC<CreateProductProps> = () => {
               name: '',
               quantity: '',
               price: 0,
-              imageUri: 'http://via.placeholder.com/125x125',
+              imageUri: '',
             }}
             onSubmit={values => console.log(values)}>
             {({values, errors, handleSubmit, handleChange, touched}) => {
@@ -140,15 +149,28 @@ const CreateProduct: FC<CreateProductProps> = () => {
                       <Center>
                         <Button
                           variant={'unstyled'}
-                          onPress={() => getProductImage(handleChange)}>
-                          <Image
-                            source={{
-                              uri: values.imageUri,
-                            }}
-                            alt="product-image"
-                            height={125}
-                            width={125}
-                          />
+                          onPress={() =>
+                            getProductImage(handleChange('imageUri'))
+                          }>
+                          {values.imageUri ? (
+                            <Image
+                              source={{
+                                uri: values.imageUri,
+                              }}
+                              alt="product-image"
+                              height={125}
+                              width={125}
+                            />
+                          ) : (
+                            <Image
+                              source={{
+                                uri: 'http://via.placeholder.com/125x125',
+                              }}
+                              alt="product-image"
+                              height={125}
+                              width={125}
+                            />
+                          )}
                         </Button>
                       </Center>
                     </FormControl>
