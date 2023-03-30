@@ -64,13 +64,12 @@ export class FoodContract extends Contract {
         location
     ) {
         console.info("============= Start : Create Product ===========");
-        console.log(productName);
         const product = {
             name: productName,
             id,
             quantity,
             price,
-            location,
+            location: Buffer.from(JSON.stringify(location)).toString('base64'),
         };
         await ctx.stub.putState(id, Buffer.from(JSON.stringify(product)));
 
