@@ -3,11 +3,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { API_ENDPOINT_NOT_FOUND } from "./errors";
 import { authRoutes } from "./routes/Auth";
+import { productRoutes } from "./routes/Product";
 import morgan from "morgan";
 import bodyParser from "body-parser";
 import sanitizedConfig from "./config";
-import network from "./fabric/network";
-import { Response, NextFunction } from "express";
 
 // Init express
 const app = express();
@@ -32,33 +31,10 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/createProduct", network.connectToNetwork, async (req: any, res: Response, next: NextFunction) => {
-  
-  const productName = req.body.productName;
-  const id = req.body.id;
-  const price = req.body.price;
-  const quantity = req.body.quantity;
-  const location = req.body.location;
-
-  const contract = req.body.contract;
-  
-  const result = await contract.submitTransaction(
-    "createProduct",
-    productName,
-    id,
-    quantity,
-    price,
-    location
-  );
-
-  const response = result.toString();
-  res.json(result.toString());
-});
-
 // routes middlewares
 
 app.use("/api/auth", authRoutes);
-// app.use("/api/product", productRoutes);
+app.use("/api/product", productRoutes);
 
 // page not found error handling  middleware
 
@@ -104,6 +80,7 @@ if (NODE_ENV === "development") {
 // index to boot
 const App = async () => {
   try {
+    mongoose.set("strictQuery", true);
     await mongoose.connect(MONGODB_URI as string);
     console.log("Connection to database established successfully.");
     app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
