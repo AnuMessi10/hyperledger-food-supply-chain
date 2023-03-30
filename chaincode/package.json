@@ -1,7 +1,7 @@
 {
-    "name": "fabcar",
+    "name": "Food Supply Chain Traceability using Hyperledger",
     "version": "1.0.0",
-    "description": "FabCar contract implemented in TypeScript",
+    "description": "HyperLedger Fabric to Track a Food Supply Chain implemented in TypeScript",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
     "engines": {
@@ -22,7 +22,9 @@
     "license": "Apache-2.0",
     "dependencies": {
         "fabric-contract-api": "^2.0.0",
-        "fabric-shim": "^2.0.0"
+        "fabric-shim": "^2.0.0",
+        "json-stringify-deterministic": "^1.0.8",
+        "sort-keys-recursive": "^2.1.8"
     },
     "devDependencies": {
         "@types/chai": "^4.1.7",
