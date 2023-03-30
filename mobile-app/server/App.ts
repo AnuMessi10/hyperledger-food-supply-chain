@@ -48,6 +48,7 @@ app.get("/createProduct", async (req: any, res, next) => {
 
   try {
     console.log("inside network.ts");
+    
     // load the network configuration
     const ccpPath = path.resolve(
       __dirname,
@@ -91,14 +92,6 @@ app.get("/createProduct", async (req: any, res, next) => {
     // Get the contract from the network.
     const contract = network.getContract("basic");
 
-    // Submit the specified transaction.
-    // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
-    // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR12', 'Dave')
-    // await contract.submitTransaction('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom');
-    // console.log('Transaction has been submitted');
-
-    // // Disconnect from the gateway.
-    // await gateway.disconnect();
     req.contract = contract;
     // next();
   } catch (error) {
