@@ -7,8 +7,8 @@
 "use strict";
 
 import { Gateway, Wallets } from "fabric-network";
-import fs from "fs";
-import path from "path";
+import { readFileSync } from "fs";
+import { join, resolve } from "path";
 import { Request, Response, NextFunction } from "express";
 
 async function connectToNetwork(
@@ -18,8 +18,9 @@ async function connectToNetwork(
 ) {
   try {
     // load the network configuration
-    const ccpPath = path.resolve(
+    const ccpPath = resolve(
       __dirname,
+      "..",
       "..",
       "..",
       "network",
@@ -29,10 +30,10 @@ async function connectToNetwork(
       "org1.example.com",
       "connection-org1.json"
     );
-    let ccp = JSON.parse(fs.readFileSync(ccpPath, "utf8"));
+    let ccp = JSON.parse(readFileSync(ccpPath, "utf8"));
 
     // Create a new file system based wallet for managing identities.
-    const walletPath = path.join(process.cwd(), "wallet");
+    const walletPath = join(process.cwd(), "fabric/wallet");
     const wallet = await Wallets.newFileSystemWallet(walletPath);
     console.log(`Wallet path: ${walletPath}`);
 
@@ -45,7 +46,6 @@ async function connectToNetwork(
       console.log("Run the registerUser.js application before retrying");
       return;
     }
-
     // Create a new gateway for connecting to our peer node.
     const gateway = new Gateway();
     await gateway.connect(ccp, {
@@ -62,9 +62,7 @@ async function connectToNetwork(
 
     // // Disconnect from the gateway.
     // await gateway.disconnect();
-    console.log("Before contract");
-    req.contract = contract;
-    console.log("Before next");
+    req.body.contract = contract;
     next();
   } catch (error) {
     console.error(`Failed to submit your requested transaction: ${error}`);
