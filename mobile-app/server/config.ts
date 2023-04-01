@@ -13,9 +13,12 @@ const getConfig = (): NodeJS.ProcessEnv => {
     NODE_ENV: process.env.NODE_ENV,
     MONGODB_URI: process.env.MONGODB_URI,
     ORIGIN: process.env.ORIGIN,
-    FAST2SMS: process.env.FAST2SMS,
-    JWT_SECRET: process.env.JWT_SECRET,
     PORT: process.env.PORT,
+    JWT_PRIVATE_SECRET: process.env.JWT_PRIVATE_SECRET as string,
+    JWT_PUBLIC_SECRET: process.env.JWT_PUBLIC_SECRET as string,
+    TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
+    TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
+    TWILIO_MOBILE_NUMBER: process.env.TWILIO_MOBILE_NUMBER
   };
 };
 
@@ -37,10 +40,3 @@ const config = getConfig();
 const sanitizedConfig = getSanitzedConfig(config);
 
 export default sanitizedConfig;
-
-// export const PORT = process.env.PORT;
-// export const MONGODB_URI = process.env.MONGODB_URI;
-// export const NODE_ENV = process.env.NODE_ENV;
-// export const JWT_SECRET: Secret = process.env.JWT_SECRET as string;
-// export const ORIGIN = process.env.ORIGIN;
-// export const FAST2SMS = process.env.FAST2SMS

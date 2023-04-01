@@ -1,8 +1,11 @@
-const fast2sms = require("fast-two-sms");
 import { NextFunction } from "express";
 import sanitizedConfig from "../config";
 
-const { FAST2SMS } = sanitizedConfig;
+const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_MOBILE_NUMBER } = sanitizedConfig;
+
+const accountSid = TWILIO_ACCOUNT_SID;
+const authToken = TWILIO_AUTH_TOKEN;
+const twilioClient = require("twilio")(accountSid, authToken);
 
 export const generateOTP = (otp_length: number) => {
   // Declare a digits variable
@@ -15,17 +18,24 @@ export const generateOTP = (otp_length: number) => {
   return OTP;
 };
 
-export const fast2SMS = async (
+export const sendTwilioSMS = async (
   { message, contactNumber }: { message: string; contactNumber: number },
   next: NextFunction
 ) => {
   try {
-    const res = await fast2sms.sendMessage({
-      authorization: FAST2SMS,
-      message,
-      numbers: [contactNumber],
-    });
-    console.log(res);
+    twilioClient.messages
+      .create({
+        body: message,
+        to: `+91${contactNumber}`,
+        from: TWILIO_MOBILE_NUMBER,
+      })
+      .then((res: any) => {
+        console.log("OTP sent successfully");
+        // console.log(res);
+      })
+      .catch((err: any) => {
+        console.error("Error sending OTP:", err);
+      });
   } catch (error) {
     next(error);
   }

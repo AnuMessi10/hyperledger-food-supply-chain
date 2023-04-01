@@ -14,14 +14,13 @@ const OTP: FC<IOTPProps> = ({navigation}) => {
   const {mobile} = useContext(AuthContext);
 
   const verifyOTP = () => {
-    console.log('verify otp');
-    fetch('http://localhost:5000/api/auth/verify', {
+    fetch('http://localhost:5000/api/auth/verifyOtp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        mobile: 9870056432,
+        mobile: mobile,
         otp: otp,
       }),
     })

@@ -1,6 +1,6 @@
 import User from "../../models/user";
 import { createJwtToken } from "../../utils/token";
-import { generateOTP, fast2SMS } from "../../utils/otp";
+import { generateOTP, sendTwilioSMS } from "../../utils/otp";
 import {
   INCORRECT_OTP,
   PHONE_ALREADY_EXISTS,
@@ -29,21 +29,21 @@ const registerUser = async (req: Request, res: Response, next: NextFunction) => 
 
     res.status(200).json({
       type: "success",
-      message: "Account created OTP sended to mobile number",
+      message: "Account created, sending OTP to mobile number...",
       data: {
         userId: user._id,
       },
     });
 
     // generate otp
-    const otp = generateOTP(6);
+    const otp = generateOTP(5);
     // save otp to user collection
     user.phoneOtp = Number(otp);
     await user.save();
     // send otp to mobile number
-    await fast2SMS(
+    await sendTwilioSMS(
       {
-        message: `Your OTP is ${otp}`,
+        message: `Your OTP for FoodNet is ${otp}`,
         contactNumber: user.mobile,
       },
       next
@@ -99,7 +99,9 @@ const verifyOtp = async (req: Request, res: Response, next: NextFunction) => {
       next({ status: 400, message: INCORRECT_OTP });
       return;
     }
-    
+    else{
+      console.log("OTP matched successfully");
+    }
     const token = createJwtToken({ userId: user._id });
 
     user.phoneOtp = -1;

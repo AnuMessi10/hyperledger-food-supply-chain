@@ -6,9 +6,12 @@ declare global {
       NODE_ENV: 'development' | 'production';
       PORT: string;
       MONGODB_URI: string;
-      JWT_SECRET: string;
+      JWT_PRIVATE_SECRET: Secret;
+      JWT_PUBLIC_SECRET: Secret;
       ORIGIN?: string;
-      FAST2SMS: string;
+      TWILIO_ACCOUNT_SID: string;
+      TWILIO_AUTH_TOKEN: string;
+      TWILIO_MOBILE_NUMBER: string;
     }
   }
 }
