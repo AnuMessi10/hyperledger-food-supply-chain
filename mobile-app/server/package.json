@@ -24,9 +24,9 @@
     "express": "^4.18.2",
     "fabric-ca-client": "^2.2.4",
     "fabric-network": "^2.2.4",
-    "fast-two-sms": "^3.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.10.0",
+    "twilio": "^4.9.0",
     "typescript": "^4.9.5"
   },
   "devDependencies": {
