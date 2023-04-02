@@ -60,6 +60,56 @@ export class FoodContract extends Contract {
 
                     actor: "CONSUMER"
                 },
+                {
+                    name: "Mango",
+                    quantity: "20 boxes",
+                    price: 450,
+                    location: {
+                        lat: 21.01,
+                        lng: 72.0,
+                    },
+                    actor: "PRODUCER"
+                },
+                {
+                    name: "Grapes",
+                    quantity: "25kgs",
+                    price: 125,
+                    location: {
+                        lat: 25.44,
+                        lng: 91.0,
+                    },
+                    actor: "RETAILER"
+                },
+                {
+                    name: "Onion",
+                    quantity: "1000 kgs",
+                    price: 25,
+                    location: {
+                        lat: 12.45,
+                        lng: 27.0,
+                    },
+                    actor: "CONSUMER"
+                },
+                {
+                    name: "Oranges",
+                    quantity: "10kgs",
+                    price:100,
+                    location: {
+                        lat: 86.5,
+                        lng: 31.01,
+                    },
+                    actor: "CONSUMER"
+                },
+                {
+                    name: "Cheese",
+                    quantity: "25 boxes",
+                    price: 183,
+                    location: {
+                        lat: 56.65,
+                        lng: 45.12,
+                    },
+                    actor: "CONSUMER"
+                },
             ];
 
         for (let i = 0; i < products.length; i++) {
