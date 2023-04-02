@@ -2,6 +2,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+export type Actor = "PRODUCER" | "MANUFACTURER" | "WHOLESALER" | "DISTRIBUTOR" | "RETAILER" | "CONSUMER";
+
 export interface Product {
     id: string;
     name: string;
@@ -11,5 +13,6 @@ export interface Product {
         lat: number;
         lng: number;
     };
-    docType?: string;
+    actor: Actor;
+    // image: Picture;
 }
