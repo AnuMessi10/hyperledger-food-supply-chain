@@ -29,7 +29,7 @@ const QueryProductSchema = object({
     .positive('Please enter a valid price!'),
 });
 
-const QueryProduct: FC<QueryProductProps> = () => {
+const QueryProduct: FC<QueryProductProps> = ({}) => {
   return (
     <View>
       <ScrollView w="100%">

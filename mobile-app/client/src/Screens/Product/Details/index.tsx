@@ -1,13 +1,18 @@
+/* eslint-disable react-native/no-inline-styles */
 import {StyleSheet, View} from 'react-native';
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import {Box, Button, IconButton, Input, SearchIcon, Text} from 'native-base';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
+import ProductContext from '../../../Navigation/ProductContext';
 
 export interface ProductDetailsProps {
   navigation: NativeStackNavigationHelpers;
 }
 
-const ProductDetails: FC<ProductDetailsProps> = ({}) => {
+const ProductDetails: FC<ProductDetailsProps> = ({navigation}) => {
+  const {product} = useContext(ProductContext);
+  const {name, price, quantity} = product;
+
   return (
     <View>
       <View style={styles.search}>
@@ -47,7 +52,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({}) => {
               <Text fontSize="lg"> : </Text>
             </View>
             <View style={{flex: 0.5}}>
-              <Text fontSize="lg"> Apple Jam</Text>
+              <Text fontSize="lg">{name}</Text>
             </View>
           </View>
           <View style={{flexDirection: 'row', padding: 5}}>
@@ -74,7 +79,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({}) => {
               <Text fontSize="lg"> : </Text>
             </View>
             <View style={{flex: 0.5}}>
-              <Text fontSize="lg"> 75.00 kg</Text>
+              <Text fontSize="lg"> {quantity}</Text>
             </View>
           </View>
           <View
@@ -84,13 +89,13 @@ const ProductDetails: FC<ProductDetailsProps> = ({}) => {
               padding: 5,
             }}>
             <View style={{flex: 0.4}}>
-              <Text fontSize="lg">Location </Text>
+              <Text fontSize="lg">Price </Text>
             </View>
             <View style={{flex: 0.1}}>
               <Text fontSize="lg"> : </Text>
             </View>
             <View style={{flex: 0.5}}>
-              <Text fontSize="lg"> Mumbai</Text>
+              <Text fontSize="lg"> {price}</Text>
             </View>
           </View>
         </Box>
@@ -100,10 +105,11 @@ const ProductDetails: FC<ProductDetailsProps> = ({}) => {
           variant="outline"
           borderRadius="full"
           borderColor={'blue.500'}
-          colorScheme={'blue'}>
+          colorScheme={'blue'}
+          onPress={() => navigation.navigate('ProductLocation')}>
           Location
         </Button>
-        <Button
+        {/* <Button
           style={styles.Button}
           variant="outline"
           borderRadius="full"
@@ -118,7 +124,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({}) => {
           borderColor={'blue.500'}
           colorScheme={'blue'}>
           Scan
-        </Button>
+        </Button> */}
       </Box>
     </View>
   );
