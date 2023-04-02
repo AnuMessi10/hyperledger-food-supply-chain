@@ -15,7 +15,7 @@ import {
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {REQUIRED_FIELD_MESSAGE} from '../../Constants';
+import {REQUIRED_FIELD_MESSAGE} from '../../../Constants';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 export interface CreateProductProps {
