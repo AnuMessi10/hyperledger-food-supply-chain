@@ -36,8 +36,7 @@ const getAllProducts = async (req: any, res: Response, next: NextFunction) => {
     );
 
     const result = resultBytes.toString('utf8');
-
-    res.status(201).json(result);
+    res.status(201).json(JSON.parse(result));
 
   } catch (error) {
     throw error;

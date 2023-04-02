@@ -12,7 +12,7 @@ productRoutes.post("/create", network.connectToNetwork, createProduct);
 
 productRoutes.get("/:id", network.connectToNetwork, getProduct);
 
-productRoutes.get("s/all", network.connectToNetwork, getAllProducts);
+productRoutes.get("/get/all", network.connectToNetwork, getAllProducts);
 
 productRoutes.patch("/update/:id", network.connectToNetwork, updateProduct);
 
