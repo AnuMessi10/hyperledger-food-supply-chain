@@ -85,7 +85,7 @@ const updateProduct = async (req: any, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
     const resultBytes = await contract.evaluateTransaction(
-      "UpdateProduct",
+      "UpdateAsset",
       id,
       quantity,
       price,
@@ -130,8 +130,8 @@ const transferProduct = async (req: any, res: Response, next: NextFunction) => {
       return res.status(400).json({ message: "Missing request body" });
     }
 
-    const { contract, id, newActor } = req.body;
-
+    const { contract,  newActor } = req.body;
+    const id = req.params
     const resultBytes = await contract.evaluateTransaction(
       "TransferProduct",
       id,

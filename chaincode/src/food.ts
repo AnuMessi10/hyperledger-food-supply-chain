@@ -15,6 +15,7 @@ import sortKeysRecursive from "sort-keys-recursive";
 const stringify = require('json-stringify-deterministic');
 
 export class FoodContract extends Contract {
+    // @Transaction()
     async InitLedger(ctx: Context) {
 
         console.info("============= START : Initialize Ledger ===========");
@@ -23,7 +24,8 @@ export class FoodContract extends Contract {
             name: Product["name"];
             price: Product["price"];
             quantity: Product["quantity"];
-            location: Product["location"];  
+            location: Product["location"]; 
+            actor:Product["actor"] 
         }[] = [
                 {
                     name: "Apple",
@@ -33,6 +35,7 @@ export class FoodContract extends Contract {
                         lat: 19.5,
                         lng: 72.0,
                     },
+                    actor:"CONSUMER"
                 },
                 {
                     name: "Honey",
@@ -42,6 +45,8 @@ export class FoodContract extends Contract {
                         lat: 20.0,
                         lng: -30.0,
                     },
+                    
+                    actor:"CONSUMER"
                 },
                 {
                     name: "Jam",
@@ -51,6 +56,8 @@ export class FoodContract extends Contract {
                         lat: 50.0,
                         lng: 10.1,
                     },
+                    
+                    actor:"CONSUMER"
                 },
             ];
 
@@ -66,8 +73,8 @@ export class FoodContract extends Contract {
     }
 
     // ProductExists returns true when asset with given ID exists in world state.
-    @Transaction(false)
-    @Returns("boolean")
+    // @Transaction(false)
+    // @Returns("boolean")
     public async ProductExists(ctx: Context, id: string): Promise<boolean> {
         
         console.info("============= START : Check Product ===========")
@@ -111,8 +118,8 @@ export class FoodContract extends Contract {
     }
 
     // GetAllProducts returns all assets found in the world state.
-    @Transaction(false)
-    @Returns("string")
+    // @Transaction(false)
+    // @Returns("string")
     public async GetAllProducts(ctx: Context): Promise<string> {
 
         const allResults = [];
@@ -146,8 +153,8 @@ export class FoodContract extends Contract {
     }
 
     // GetProduct returns the food stored in the world state with given id.
-    @Transaction(false)
-    @Returns("string")
+    // @Transaction(false)
+    // @Returns("string")
     public async GetProduct(ctx: Context, id: Product["id"]): Promise<string> {
 
         console.info("============= Start : Get Product ===========");
@@ -164,7 +171,7 @@ export class FoodContract extends Contract {
     }
 
     // UpdateAsset updates an existing asset in the world state with provided parameters.
-    @Transaction()
+    // @Transaction()
     public async UpdateAsset(
         ctx: Context,
         id: Product["id"],
@@ -201,7 +208,7 @@ export class FoodContract extends Contract {
     }
 
     // DeleteAsset deletes an given asset from the world state.
-    @Transaction()
+    // @Transaction()
     public async DeleteAsset(ctx: Context, id: Product["id"]): Promise<void> {
         
         console.info("============= Start : Delete Product ===========");
@@ -217,7 +224,7 @@ export class FoodContract extends Contract {
     }
 
     // TransferProduct updates the owner field of asset with given id in the world state, and returns the old owner.
-    @Transaction()
+    // @Transaction()
     public async TransferProduct(
         ctx: Context,
         id: Product["id"],
