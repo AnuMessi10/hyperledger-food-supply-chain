@@ -1,11 +1,8 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {FC} from 'react';
 import {
   Box,
   Button,
-  Container,
-  Fab,
-  HamburgerIcon,
   IconButton,
   Input,
   SearchIcon,
@@ -13,20 +10,12 @@ import {
   Text,
 } from 'native-base';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {flexbox} from 'native-base/lib/typescript/theme/styled-system';
-import MapView , { Marker } from 'react-native-maps';
 
-const coordinate = {
-  latitude: 19.2228481,
-  longitude: 72.8683325,
-};
-
-export interface ProductionLocationProps {
+export interface ShipProductProps {
   navigation: NativeStackNavigationHelpers;
 }
 
-const ProductionLocation: FC<ProductionLocationProps> = ({}) => {
+const ShipProduct: FC<ShipProductProps> = ({}) => {
   return (
     <View>
       <View style={styles.search}>
@@ -46,26 +35,25 @@ const ProductionLocation: FC<ProductionLocationProps> = ({}) => {
       </View>
       <Box style={styles.detailsContainer} bgColor={'blueGray.200'}>
         <Text bold fontSize="4xl" marginTop={'3.5'} textAlign={'center'}>
-          Location
+          Ship
         </Text>
         <Box
           style={styles.Box}
           borderRadius={'lg'}
           bgColor={'blueGray.300'}
           paddingY={2}>
-          <MapView style={styles.map}
-            initialRegion={{
-              latitude: coordinate.latitude,
-              longitude: coordinate.longitude,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-            minZoomLevel={10}
-
-          >
-            
-            <Marker coordinate={{latitude: coordinate.latitude , longitude: coordinate.longitude}}/>
-          </MapView>
+          <Select
+            fontSize={'lg'}
+            borderRadius={'lg'}
+            placeholderTextColor={'black'}
+            placeholder="Ship To "
+            minWidth="64">
+            <Select.Item label="Customer" value="Customer" />
+            <Select.Item label="Distributer" value="Distributer" />
+            <Select.Item label="Wholesaler" value="Wholesaler" />
+            <Select.Item label="Retailer" value="Retailer" />
+            <Select.Item label="Manufacturer" value="Manufacturer" />
+          </Select>
         </Box>
 
         <Button
@@ -75,6 +63,14 @@ const ProductionLocation: FC<ProductionLocationProps> = ({}) => {
           borderColor={'blue.500'}
           colorScheme={'blue'}>
           Back
+        </Button>
+        <Button
+          style={styles.Button}
+          variant="outline"
+          borderRadius="full"
+          borderColor={'blue.500'}
+          colorScheme={'blue'}>
+          Confirm
         </Button>
       </Box>
     </View>
@@ -103,14 +99,10 @@ const styles = StyleSheet.create({
   Box: {
     display: 'flex',
     alignItems: 'center',
-    marginHorizontal: '10%',
+    marginHorizontal: '15%',
     marginVertical: '4%',
     justifyContent: 'center',
-    height: '40%',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
   },
 });
-export default ProductionLocation;
+export default ShipProduct;
 // change text color of react native button?

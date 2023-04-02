@@ -1,18 +1,8 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {FC} from 'react';
-import {
-  Box,
-  Button,
-  Container,
-  Fab,
-  IconButton,
-  Input,
-  SearchIcon,
-  Text,
-} from 'native-base';
+import {Box, Button, IconButton, Input, SearchIcon, Text} from 'native-base';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {flexbox} from 'native-base/lib/typescript/theme/styled-system';
+
 export interface ProductDetailsProps {
   navigation: NativeStackNavigationHelpers;
 }
@@ -24,17 +14,15 @@ const ProductDetails: FC<ProductDetailsProps> = ({}) => {
         <View style={{flex: 0.7, marginRight: 20}}>
           <Input placeholder="Default Input" borderRadius={'lg'} />
         </View>
-        <View  style={{flex: 0.15, alignItems:"center", justifyContent:"center"}} >
-
-            <IconButton
-              variant={'outline'}
-              icon={<SearchIcon/>}
-              onPress={()=>{
-              console.log('hello')
-              }}
-            />
-            
-            
+        <View
+          style={{flex: 0.15, alignItems: 'center', justifyContent: 'center'}}>
+          <IconButton
+            variant={'outline'}
+            icon={<SearchIcon />}
+            onPress={() => {
+              console.log('hello');
+            }}
+          />
         </View>
       </View>
       <Box style={styles.detailsContainer} bgColor={'blueGray.200'}>
@@ -141,7 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 5,
     marginHorizontal: 30,
-    marginTop:15
+    marginTop: 15,
   },
   detailsContainer: {
     borderWidth: 2,

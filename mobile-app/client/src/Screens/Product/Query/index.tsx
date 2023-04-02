@@ -1,13 +1,9 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {View} from 'react-native';
 import React, {FC} from 'react';
 import {
   Box,
   Button,
-  Center,
   FormControl,
-  Icon,
-  IconButton,
-  Image,
   Input,
   ScrollView,
   Stack,
@@ -17,8 +13,7 @@ import {
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {REQUIRED_FIELD_MESSAGE} from '../../Constants';
-import {launchImageLibrary} from 'react-native-image-picker';
+import {REQUIRED_FIELD_MESSAGE} from '../../../Constants';
 
 export interface QueryProductProps {
   navigation: NativeStackNavigationHelpers;
@@ -35,17 +30,6 @@ const QueryProductSchema = object({
 });
 
 const QueryProduct: FC<QueryProductProps> = () => {
-  const getProductImage = async (handleChange: any) => {
-    let result = await launchImageLibrary({
-      mediaType: 'photo',
-    });
-
-    if (!result.didCancel) {
-      if (result.assets !== undefined) {
-        handleChange(result.assets[0].uri);
-      }
-    }
-  };
   return (
     <View>
       <ScrollView w="100%">
@@ -75,7 +59,7 @@ const QueryProduct: FC<QueryProductProps> = () => {
                     <FormControl
                       mb="2"
                       isInvalid={touched.name && !!errors.name}>
-                      <FormControl.Label></FormControl.Label>
+                      <FormControl.Label />
                       <Input
                         placeholder="Mango"
                         type="text"
@@ -95,8 +79,6 @@ const QueryProduct: FC<QueryProductProps> = () => {
                   <Box>
                     <Button onPress={handleSubmit}>Find</Button>
                   </Box>
-                           
-                  
                 </Box>
               );
             }}
