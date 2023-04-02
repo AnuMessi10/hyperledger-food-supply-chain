@@ -10,7 +10,7 @@ import QueryProduct from '../Screens/QueryProduct/index';
 import ProductDetails from '../Screens/ProductDetails/index';
 import ShipProduct from '../Screens/ShipProduct/index';
 import ProductionLocation from '../Screens/Location/index';
-// import  TestingProduct  from "../Screens/testHere/testing";
+import TestingProduct  from "../Screens/testHere/testing";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,21 +19,21 @@ const AuthStack = () => {
   const value = {mobile, setMobile};
   return (
     <AuthContext.Provider value={value}>
-      <Stack.Navigator initialRouteName="ProductionLocation">
+      <Stack.Navigator initialRouteName="Login">
         {/* Auth */}
         <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
         <Stack.Screen name="OTP" component={OTP} />
-        <Stack.Screen name="Register" component={Registration} />
-        <Stack.Screen name="Landing" component={Landing} />
+        <Stack.Screen name="Register" component={Registration} options={{headerShown: false}}/>
+        <Stack.Screen name="Landing" component={Landing} options={{headerShown: false}}/>
 
         {/* Product */}
-        <Stack.Screen name="CreateProduct" component={CreateProduct} />
-        <Stack.Screen name="QueryProduct" component={QueryProduct} />
+        <Stack.Screen name="CreateProduct" component={CreateProduct} options={{headerShown: false}}/>
+        <Stack.Screen name="QueryProduct" component={QueryProduct} options={{headerShown: false}}/>
         <Stack.Screen name="ProductDetails" component={ProductDetails} />
         <Stack.Screen name="ShipProduct" component={ShipProduct} />
         <Stack.Screen name="ProductionLocation" component={ProductionLocation} />
 
-        {/* <Stack.Screen name="TestingProduct" component={TestingProduct} /> */}
+        <Stack.Screen name="TestingProduct" component={TestingProduct} />
 
       </Stack.Navigator>
     </AuthContext.Provider>

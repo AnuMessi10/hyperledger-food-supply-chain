@@ -5,6 +5,7 @@ import {
   Button,
   Center,
   FormControl,
+  Heading,
   Icon,
   IconButton,
   Image,
@@ -19,6 +20,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {REQUIRED_FIELD_MESSAGE} from '../../Constants';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export interface QueryProductProps {
   navigation: NativeStackNavigationHelpers;
@@ -28,84 +30,110 @@ const {object, string, number} = Yup;
 
 const QueryProductSchema = object({
   name: string().required(REQUIRED_FIELD_MESSAGE),
-  quantity: string().required(REQUIRED_FIELD_MESSAGE),
-  price: number()
-    .required(REQUIRED_FIELD_MESSAGE)
-    .positive('Please enter a valid price!'),
+
 });
 
-const QueryProduct: FC<QueryProductProps> = () => {
-  const getProductImage = async (handleChange: any) => {
-    let result = await launchImageLibrary({
-      mediaType: 'photo',
-    });
-
-    if (!result.didCancel) {
-      if (result.assets !== undefined) {
-        handleChange(result.assets[0].uri);
-      }
-    }
-  };
+const QueryProduct: FC<QueryProductProps> = ({navigation}) => {
   return (
-    <View>
-      <ScrollView w="100%">
+    <Box bgColor={'cyan.100'}>
+      <View style={styles.main}>
         <Stack
           space={2.5}
           alignSelf="center"
           px="4"
           safeArea
           mt="4"
-          w={{
-            base: '100%',
-            md: '25%',
-          }}>
+          >
           <Formik
             validationSchema={QueryProductSchema}
             initialValues={{
               name: '',
             }}
-            onSubmit={values => console.log(values)}>
+            onSubmit={values => {
+              console.log('====================================');
+              console.log(values);
+              console.log('====================================');
+                navigation.navigate('Register')
+            }}>
             {({values, errors, handleSubmit, handleChange, touched}) => {
               return (
-                <Box>
-                  <Box>
-                    <Text bold fontSize="xl" mb="4">
-                      Find your product details below
-                    </Text>
-                    <FormControl
-                      mb="2"
+                <Box
+                  borderWidth={2}
+                  borderColor={'blue.300'}
+                  borderRadius={'lg'}>
+                  <Box style={styles.box}>
+                    <Heading
+                      color={'blue.700'}
+                      textAlign={'center'}
+                      variant="h3"
+                      mb="4">
+                      Find your product
+                    </Heading>
+                    <FormControl width={'72'}
+                      mb="2" style={styles.input}
                       isInvalid={touched.name && !!errors.name}>
-                      <FormControl.Label></FormControl.Label>
-                      <Input
+                      <FormControl.Label>Enter your product name</FormControl.Label>
+                      <Input borderRadius={'lg'} borderColor={'blue.500'}
                         placeholder="Mango"
                         type="text"
                         value={values.name}
                         onChangeText={handleChange('name')}
                       />
                       <FormControl.HelperText>
-                        What is this product? e.g. A bag of apple, a bottle of
-                        ketchup etc.
+                        E.g. A bag of apple
                       </FormControl.HelperText>
                       <FormControl.ErrorMessage
                         leftIcon={<WarningOutlineIcon size="xs" />}>
                         {errors.name}
                       </FormControl.ErrorMessage>
                     </FormControl>
+                    <Box>
+                      <Button
+                        variant="outline"
+                        borderRadius="full"
+                        borderColor={'blue.500'}
+                        colorScheme={'blue'}
+                        mb="4"
+                        onPress={handleSubmit}>
+                        Find
+                      </Button>
+                    </Box>
                   </Box>
-                  <Box>
-                    <Button onPress={handleSubmit}>Find</Button>
-                  </Box>
-                           
-                  
                 </Box>
               );
             }}
           </Formik>
         </Stack>
-      </ScrollView>
-    </View>
+      </View>
+    </Box>
+
+    
   );
 };
-
+const styles = StyleSheet.create({
+  main:{
+    height:"110%",
+    display:"flex",
+    alignItems:"center",
+    alignContent:'center',
+    marginTop:"30%",
+    
+    
+  },
+  box: {
+    paddingHorizontal: 30,
+    paddingVertical: 50,
+    display: 'flex',
+    marginVertical:"15%"
+  },
+  input: {
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+});
 export default QueryProduct;
 // generate an button with icons in react native?

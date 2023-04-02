@@ -1,10 +1,10 @@
 import {View, StyleSheet} from 'react-native';
 import React, {FC, useState} from 'react';
-import {Input, Button, Heading} from 'native-base';
+import {Input, Button, Heading, Box, DeleteIcon, CheckIcon, IconButton, Text} from 'native-base';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
-
+import { background } from 'native-base/lib/typescript/theme/styled-system';
 export interface ILoginProps {
   navigation: NativeStackNavigationHelpers;
 }
@@ -37,14 +37,15 @@ const Login: FC<ILoginProps> = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView>
-      <View style={styles.login}>
+    <Box bgColor={'cyan.100'}>
+    <SafeAreaView style={styles.main}>
+      <Box borderWidth={2}  borderColor={'blue.300'} borderRadius={'lg'} style={styles.Login}  >
         <View style={styles.header}>
-          <Heading variant="h3">Login to your account</Heading>
+          <Heading color={'blue.700'} variant="h3" mb="4" > Login to your account</Heading>
         </View>
         <View>
           <View style={styles.input}>
-            <Input
+            <Input borderRadius={'lg'} borderColor={'blue.500'}
               type={'text'}
               placeholder="Enter your registered mobile number"
               onChangeText={mobile => {
@@ -56,16 +57,24 @@ const Login: FC<ILoginProps> = ({navigation}) => {
             />
           </View>
           <View style={styles.input}>
-            <Input
+            <Input borderRadius={'lg'} borderColor={'blue.500'}
               type={show ? 'text' : 'password'}
               placeholder="Password"
-              InputRightElement={
-                <Icon
-                  name={show ? 'eye-slash' : 'eye'}
-                  onPress={() => setShow(!show)}
-                  size={30}
-                />
-              }
+              // InputRightElement={
+                // <IconButton
+                //   variant="solid"
+                //   icon={show ? <DeleteIcon /> : <CheckIcon/>}
+                //   onPress={() => setShow(!show)}
+                  
+                  
+                // />
+                
+                
+                // <Icon
+                //   name = {}
+                //   size={30}
+                // />
+              // }
               onChangeText={password => {
                 setFormFields({
                   ...formFields,
@@ -79,30 +88,43 @@ const Login: FC<ILoginProps> = ({navigation}) => {
           <Button variant="unstyled">Forgot your password?</Button>
         </View>
         <View>
-          <Button variant="solid" onPress={() => handleLogin()}>
+          <Button 
+          variant="outline"
+          borderRadius="full"
+          borderColor={'blue.500'}
+          colorScheme={'blue'} onPress={() => handleLogin()}>
             Login
           </Button>
         </View>
-        <View>
-          <Button
-            variant="unstyled"
+        <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'center'}>
+          <Text >Don't have an account?</Text>
+          <Button 
+            variant="unstyled" paddingLeft={'1'}
             onPress={() => navigation.navigate('Register')}>
-            Don't have an account? Sign up
+             <Text bold color={'blue.500'} >Sign up</Text>
           </Button>
-        </View>
-      </View>
+        </Box>
+      </Box>
     </SafeAreaView>
+    </Box>
   );
 };
 
 const styles = StyleSheet.create({
-  login: {
-    borderWidth: 1,
-    borderColor: 'black',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+  main:{
+    height:"110%",
+    display:"flex",
+    alignItems:"center",
+    alignContent:'center',
+    marginTop:"30%",
+    
+    
+  },
+  Login: {
+    paddingHorizontal: 50,
+    paddingVertical: 50,
     display: 'flex',
-    margin: 5,
+    marginVertical:"15%"
   },
   input: {
     paddingVertical: 10,

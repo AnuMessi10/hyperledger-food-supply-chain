@@ -1,10 +1,11 @@
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {FC} from 'react';
 import {
   Box,
   Button,
   Center,
   FormControl,
+  Heading,
   Image,
   Input,
   ScrollView,
@@ -54,8 +55,9 @@ const CreateProduct: FC<CreateProductProps> = () => {
   };
 
   return (
-    <View>
-      <ScrollView w="100%">
+    <Box bgColor={'cyan.100'}>
+      <View style={styles.main}>
+      <Box borderWidth={2}  borderColor={'blue.300'} borderRadius={'lg'} style={styles.box}>
         <Stack
           space={2.5}
           alignSelf="center"
@@ -79,22 +81,19 @@ const CreateProduct: FC<CreateProductProps> = () => {
               return (
                 <Box>
                   <Box>
-                    <Text bold fontSize="xl" mb="4">
-                      Add your product details below
-                    </Text>
-                    <FormControl
+                  <Heading color={'blue.700'} textAlign={'center'} variant="h3" mb="4" >Add your Product</Heading>
+                    <FormControl width={'72'}
                       mb="2"
                       isInvalid={touched.name && !!errors.name}>
                       <FormControl.Label>Name</FormControl.Label>
-                      <Input
+                      <Input borderRadius={'lg'} borderColor={'blue.500'}
                         placeholder="Honey"
                         type="text"
                         value={values.name}
                         onChangeText={handleChange('name')}
                       />
                       <FormControl.HelperText>
-                        What is this product? e.g. A bag of apple, a bottle of
-                        ketchup etc.
+                        E.g. A bag of apple
                       </FormControl.HelperText>
                       <FormControl.ErrorMessage
                         leftIcon={<WarningOutlineIcon size="xs" />}>
@@ -107,15 +106,14 @@ const CreateProduct: FC<CreateProductProps> = () => {
                       mb="2"
                       isInvalid={touched.quantity && !!errors.quantity}>
                       <FormControl.Label>Quantity</FormControl.Label>
-                      <Input
+                      <Input borderRadius={'lg'} borderColor={'blue.500'}
                         placeholder="20 pots of honey"
                         type="text"
                         value={values.quantity}
                         onChangeText={handleChange('quantity')}
                       />
                       <FormControl.HelperText>
-                        How many of items of the product are included? e.g. 100
-                        apples, 50 litres of oil etc.
+                        E.g. 100 apples.
                       </FormControl.HelperText>
                       <FormControl.ErrorMessage
                         leftIcon={<WarningOutlineIcon size="xs" />}>
@@ -128,14 +126,14 @@ const CreateProduct: FC<CreateProductProps> = () => {
                       mb="2"
                       isInvalid={touched.price && !!errors.price}>
                       <FormControl.Label>Price</FormControl.Label>
-                      <Input
+                      <Input borderRadius={'lg'} borderColor={'blue.500'}
                         placeholder="20 pots of honey"
                         type="text"
                         value={`${values.price}`}
                         onChangeText={handleChange('price')}
                       />
                       <FormControl.HelperText>
-                        What is the value of this product in ₹?
+                        Eg 100/kg
                       </FormControl.HelperText>
                       <FormControl.ErrorMessage
                         leftIcon={<WarningOutlineIcon size="xs" />}>
@@ -176,16 +174,43 @@ const CreateProduct: FC<CreateProductProps> = () => {
                     </FormControl>
                   </Box>
                   <Box>
-                    <Button onPress={handleSubmit}>Create your product</Button>
+                    <Button variant="outline"
+          borderRadius="full"
+          borderColor={'blue.500'}
+          colorScheme={'blue'} mb="4" onPress={handleSubmit}>Create your product</Button>
                   </Box>
                 </Box>
               );
             }}
           </Formik>
         </Stack>
-      </ScrollView>
+      </Box>
     </View>
+    </Box>
   );
 };
+const styles = StyleSheet.create({
+  main:{
+    height:"110%",
+    display:"flex",
+    alignItems:"center",
+    alignContent:'center',   
+  },
+  box: {
+    paddingHorizontal: 25,
+    paddingVertical: 20,
+    display: 'flex',
+    marginVertical:"14%",
+    marginHorizontal:"1%"
+  },
+  input: {
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+});
 
 export default CreateProduct;
