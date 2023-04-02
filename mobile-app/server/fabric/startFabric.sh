@@ -38,7 +38,7 @@ rm -rf wallet/*
 pushd ../../../network/test-network
 ./network.sh down
 ./network.sh up createChannel -ca -s couchdb
-./network.sh deployCC -ccn basic -ccv 1 -cci initLedger -ccl ${CC_SRC_LANGUAGE} -ccp ${CC_SRC_PATH}
+./network.sh deployCC -ccn basic -ccv 1 -cci InitLedger -ccl ${CC_SRC_LANGUAGE} -ccp ${CC_SRC_PATH}
 # ./network.sh deployCC -ccn basic -ccv 1 -cci initLedger -ccl ${CC_SRC_LANGUAGE}
 popd
 
