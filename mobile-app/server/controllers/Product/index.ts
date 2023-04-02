@@ -7,7 +7,7 @@ const createProduct = async (req: any, res: Response, next: NextFunction) => {
     return res.status(400).json({ message: "Missing request body" });
   }
 
-  const { name, id, price, quantity, location, contract } = req.body;
+  const { name, id, price, quantity, location, actor, contract } = req.body;
 
   const resultBytes = await contract.submitTransaction(
     "CreateProduct",
@@ -15,7 +15,8 @@ const createProduct = async (req: any, res: Response, next: NextFunction) => {
     id,
     quantity,
     price,
-    location
+    location,
+    actor
   );
 
   const result = resultBytes.toString();
@@ -27,9 +28,6 @@ const createProduct = async (req: any, res: Response, next: NextFunction) => {
 
 const getAllProducts = async (req: any, res: Response, next: NextFunction) => {
   try {
-    if (!req.body) {
-      return res.status(400).json({ message: "Missing request body" });
-    }
 
     const { contract } = req.body;
 
@@ -37,7 +35,7 @@ const getAllProducts = async (req: any, res: Response, next: NextFunction) => {
       "GetAllProducts"
     );
 
-    const result = resultBytes.toString();
+    const result = resultBytes.toString('utf8');
 
     res.status(201).json(result);
 
@@ -62,10 +60,10 @@ const getProduct = async (req: any, res: Response, next: NextFunction) => {
       "GetProduct",
       id
     );
+    const resultStringified = resultBytes.toString();
+    const resultParsed = JSON.parse(resultStringified);
 
-    const result = resultBytes.toString();
-
-    res.status(201).json(result);
+    res.status(201).json({ id, ...resultParsed });
 
   } catch (error) {
     throw error;
@@ -80,22 +78,23 @@ const updateProduct = async (req: any, res: Response, next: NextFunction) => {
       return res.status(400).json({ message: "Missing request body" });
     }
 
-    const { contract, quantity, price, name, location } = req.body;
+    const { contract, quantity, price, name, location, actor } = req.body;
 
     const { id } = req.params;
 
     const resultBytes = await contract.evaluateTransaction(
-      "UpdateAsset",
+      "UpdateProduct",
       id,
       quantity,
       price,
       name,
       location,
+      actor
     );
+    const resultStringified = resultBytes.toString();
+    const resultParsed = JSON.parse(resultStringified);
 
-    const result = resultBytes.toString();
-
-    res.status(201).json({ message: `Product with ${id} updated successfully`, updatedProduct: result });
+    res.status(201).json({ message: `Product with ${id} updated successfully`, updatedProduct: resultParsed });
 
   } catch (error) {
     throw error;
@@ -106,11 +105,8 @@ const updateProduct = async (req: any, res: Response, next: NextFunction) => {
 
 const deleteProduct = async (req: any, res: Response, next: NextFunction) => {
   try {
-    if (!req.body) {
-      return res.status(400).json({ message: "Missing request body" });
-    }
-
-    const { contract, id } = req.body;
+    const { contract } = req.body;
+    const { id } = req.params;
 
     await contract.evaluateTransaction(
       "DeleteProduct",
@@ -130,17 +126,19 @@ const transferProduct = async (req: any, res: Response, next: NextFunction) => {
       return res.status(400).json({ message: "Missing request body" });
     }
 
-    const { contract,  newActor } = req.body;
-    const id = req.params
+    const { contract, actor } = req.body;
+    const { id } = req.params
     const resultBytes = await contract.evaluateTransaction(
       "TransferProduct",
       id,
-      newActor
+      actor
     );
 
     const result = resultBytes.toString();
 
-    res.status(201).json({ message: `Product with ${id} updated successfully`, updatedProduct: result });
+    // console.log(JSON.parse(resultBytes.toString()));
+
+    res.status(201).json({ message: `Product with ${id} was transferred from ${result} to ${actor} successfully!` });
 
   } catch (error) {
     throw error;

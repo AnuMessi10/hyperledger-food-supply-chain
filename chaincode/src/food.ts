@@ -10,7 +10,8 @@ import {
     Info,
 } from "fabric-contract-api";
 import { Product } from "./Models/product";
-import sortKeysRecursive from "sort-keys-recursive";
+// import sortKeysRecursive from "sort-keys-recursive";
+const sortKeysRecursive = require("sort-keys-recursive");
 // import stringify from 'json-stringify-deterministic';
 const stringify = require('json-stringify-deterministic');
 
@@ -19,13 +20,13 @@ export class FoodContract extends Contract {
     async InitLedger(ctx: Context) {
 
         console.info("============= START : Initialize Ledger ===========");
-        
+
         const products: {
             name: Product["name"];
             price: Product["price"];
             quantity: Product["quantity"];
-            location: Product["location"]; 
-            actor:Product["actor"] 
+            location: Product["location"];
+            actor: Product["actor"]
         }[] = [
                 {
                     name: "Apple",
@@ -35,7 +36,7 @@ export class FoodContract extends Contract {
                         lat: 19.5,
                         lng: 72.0,
                     },
-                    actor:"CONSUMER"
+                    actor: "CONSUMER"
                 },
                 {
                     name: "Honey",
@@ -45,8 +46,8 @@ export class FoodContract extends Contract {
                         lat: 20.0,
                         lng: -30.0,
                     },
-                    
-                    actor:"CONSUMER"
+
+                    actor: "CONSUMER"
                 },
                 {
                     name: "Jam",
@@ -56,14 +57,14 @@ export class FoodContract extends Contract {
                         lat: 50.0,
                         lng: 10.1,
                     },
-                    
-                    actor:"CONSUMER"
+
+                    actor: "CONSUMER"
                 },
             ];
 
         for (let i = 0; i < products.length; i++) {
             await ctx.stub.putState(
-                "Product " + `${i + 1}`,
+                `${i + 1}`,
                 Buffer.from(JSON.stringify(products[i]))
             );
             console.info("Added ↔ ", products[i]);
@@ -76,7 +77,7 @@ export class FoodContract extends Contract {
     // @Transaction(false)
     // @Returns("boolean")
     public async ProductExists(ctx: Context, id: string): Promise<boolean> {
-        
+
         console.info("============= START : Check Product ===========")
 
         const assetJSON = await ctx.stub.getState(id);
@@ -92,7 +93,8 @@ export class FoodContract extends Contract {
         id: Product["id"],
         quantity: Product["quantity"],
         price: Product["price"],
-        location: Product["location"]
+        location: Product["location"],
+        actor: Product["actor"]
     ) {
         console.info("============= Start : Create Product ===========");
 
@@ -104,10 +106,10 @@ export class FoodContract extends Contract {
 
         const product = {
             name,
-            id,
             quantity,
             price,
             location,
+            actor
         };
 
         await ctx.stub.putState(id, Buffer.from(JSON.stringify(product)));
@@ -148,7 +150,7 @@ export class FoodContract extends Contract {
 
             result = await iterator.next();
         }
-        
+
         return JSON.stringify(allResults);
     }
 
@@ -160,29 +162,30 @@ export class FoodContract extends Contract {
         console.info("============= Start : Get Product ===========");
 
         const productAsBytes = await ctx.stub.getState(id); // get the asset from chaincode state
-        
+
         if (!productAsBytes || productAsBytes.length === 0) {
             throw new Error(`The product ${id} does not exist`);
         }
-        
+
         console.info("============= END : Get Product ===========");
-        
+
         return productAsBytes.toString();
     }
 
     // UpdateAsset updates an existing asset in the world state with provided parameters.
     // @Transaction()
-    public async UpdateAsset(
+    public async UpdateProduct(
         ctx: Context,
         id: Product["id"],
         quantity: Product["quantity"],
         price: Product["price"],
         name: Product["name"],
-        location: Product["location"]
+        location: Product["location"],
+        actor: Product["actor"],
     ): Promise<void> {
-        
+
         console.info("============= Start : Update Product ===========");
-        
+
         const exists = await this.ProductExists(ctx, id);
 
         if (!exists) {
@@ -191,11 +194,11 @@ export class FoodContract extends Contract {
 
         // overwriting original asset with new asset
         const updatedAsset = {
-            id,
             quantity,
             price,
             name,
             location,
+            actor
         };
 
         console.info("============= End : Update Product ===========");
@@ -203,16 +206,16 @@ export class FoodContract extends Contract {
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         return ctx.stub.putState(
             id,
-            Buffer.from(stringify(sortKeysRecursive(updatedAsset)))
+            Buffer.from(JSON.stringify(updatedAsset))
         );
     }
 
     // DeleteAsset deletes an given asset from the world state.
     // @Transaction()
-    public async DeleteAsset(ctx: Context, id: Product["id"]): Promise<void> {
-        
+    public async DeleteProduct(ctx: Context, id: Product["id"]): Promise<void> {
+
         console.info("============= Start : Delete Product ===========");
-        
+
         const exists = await this.ProductExists(ctx, id);
         if (!exists) {
             throw new Error(`The asset ${id} does not exist`);
@@ -234,15 +237,12 @@ export class FoodContract extends Contract {
         console.info("============= Start : Transfer Product ===========");
 
         const assetString = await this.GetProduct(ctx, id);
-        const asset = JSON.parse(assetString);
-        const oldActor = asset.Actor;
-        asset.Actor = newActor;
+        const asset: Product = JSON.parse(assetString);
+        const oldActor = asset.actor;
+        asset.actor = newActor;
 
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-        await ctx.stub.putState(
-            id,
-            Buffer.from(stringify(sortKeysRecursive(asset)))
-        );
+        await this.UpdateProduct(ctx, asset.id, asset.quantity, asset.price, asset.name, asset.location, newActor);
 
         console.info("============= End : Transfer Product ===========");
 
