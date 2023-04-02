@@ -242,7 +242,7 @@ export class FoodContract extends Contract {
         asset.actor = newActor;
 
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-        await this.UpdateProduct(ctx, asset.id, asset.quantity, asset.price, asset.name, asset.location, newActor);
+        await this.UpdateProduct(ctx, id, asset.quantity, asset.price, asset.name, asset.location, newActor);
 
         console.info("============= End : Transfer Product ===========");
 

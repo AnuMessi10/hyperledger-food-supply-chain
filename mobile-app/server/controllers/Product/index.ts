@@ -82,7 +82,7 @@ const updateProduct = async (req: any, res: Response, next: NextFunction) => {
 
     const { id } = req.params;
 
-    const resultBytes = await contract.evaluateTransaction(
+    const resultBytes = await contract.submitTransaction(
       "UpdateProduct",
       id,
       quantity,
@@ -119,7 +119,7 @@ const deleteProduct = async (req: any, res: Response, next: NextFunction) => {
     throw error;
   }
 };
-
+//--------------------Transfer Product --------------------------
 const transferProduct = async (req: any, res: Response, next: NextFunction) => {
   try {
     if (!req.body) {
@@ -128,7 +128,8 @@ const transferProduct = async (req: any, res: Response, next: NextFunction) => {
 
     const { contract, actor } = req.body;
     const { id } = req.params
-    const resultBytes = await contract.evaluateTransaction(
+    console.log("id is",id);
+    const resultBytes = await contract.submitTransaction(
       "TransferProduct",
       id,
       actor
