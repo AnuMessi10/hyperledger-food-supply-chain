@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   Fab,
+  Heading,
   IconButton,
   Input,
   SearchIcon,
@@ -19,10 +20,10 @@ export interface ProductDetailsProps {
 
 const ProductDetails: FC<ProductDetailsProps> = ({}) => {
   return (
-    <View>
+    <Box bgColor={'cyan.100'} style={styles.root}>
       <View style={styles.search}>
         <View style={{flex: 0.7, marginRight: 20}}>
-          <Input placeholder="Default Input" borderRadius={'lg'} />
+          <Input borderRadius={'lg'} borderColor={'blue.500'}  placeholder="Apples" />
         </View>
         <View  style={{flex: 0.15, alignItems:"center", justifyContent:"center"}} >
 
@@ -33,18 +34,14 @@ const ProductDetails: FC<ProductDetailsProps> = ({}) => {
               console.log('hello')
               }}
             />
-            
-            
         </View>
       </View>
-      <Box style={styles.detailsContainer} bgColor={'blueGray.200'}>
-        <Text bold fontSize="4xl" marginTop={'3.5'} textAlign={'center'}>
-          Details
-        </Text>
+      <Box style={styles.detailsContainer} bgColor={'cyan.100'}>
+      <Heading color={'blue.700'} textAlign={"center"} fontSize={'3xl'} mt="10" > Details </Heading>
         <Box
           style={styles.Box}
           borderRadius={'lg'}
-          bgColor={'blueGray.300'}
+          bgColor={'cyan.200'}
           p="12">
           <View
             style={{
@@ -123,7 +120,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({}) => {
           colorScheme={'blue'}>
           History
         </Button>
-        <Button
+        <Button marginBottom={'10'}
           style={styles.Button}
           variant="outline"
           borderRadius="full"
@@ -132,24 +129,27 @@ const ProductDetails: FC<ProductDetailsProps> = ({}) => {
           Scan
         </Button>
       </Box>
-    </View>
+    </Box>
   );
 };
 const styles = StyleSheet.create({
+  root: {
+    // minHeight: height - 200,
+    height:"110%",
+  },
   search: {
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 5,
     marginHorizontal: 30,
-    marginTop:15
+    marginTop:"13%",
+    marginBottom:"8%"
   },
   detailsContainer: {
     borderWidth: 2,
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
-    marginTop: 25,
-    height: '110%',
+    borderRadius: 30,
     borderColor: 'skyblue',
+    marginHorizontal:"4%"
   },
   Button: {
     marginHorizontal: '15%',

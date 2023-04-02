@@ -1,6 +1,6 @@
-import {View, SafeAreaView} from 'react-native';
+import {View, SafeAreaView, StyleSheet} from 'react-native';
 import React, {FC, useState, useContext} from 'react';
-import {Button, Text} from 'native-base';
+import {Box, Button, Heading, Text} from 'native-base';
 import OtpInputs from 'react-native-otp-inputs';
 import AuthContext from '../../Navigation/AuthContext';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
@@ -37,11 +37,10 @@ const OTP: FC<IOTPProps> = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView>
+    <Box bgColor={'cyan.100'} style={styles.main} >
+      <Box borderWidth={2}  borderColor={'blue.300'} borderRadius={'lg'} style={styles.box}>
       <View style={{marginTop: 20}}>
-        <Text style={{textAlign: 'center'}}>
-          An OTP has been successfully sent to your mobile number {mobile}
-        </Text>
+        <Heading color={'blue.700'} textAlign={'center'} variant="h3" mb="4" >Enter your OTP</Heading>
       </View>
       <View
         style={{
@@ -54,36 +53,75 @@ const OTP: FC<IOTPProps> = ({navigation}) => {
           style={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             width: '65%',
+
           }}
           inputStyles={{
-            color: '#FF007F',
+            color: 'blue',
+            textAlign:"center",
             borderWidth: 1,
-            width: 35,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            width: 40,
             fontWeight: '800',
             fontSize: 24,
+            marginHorizontal:4
           }}
           autofillFromClipboard={false}
           handleChange={code => setOtp(Number(code))}
           numberOfInputs={5}
         />
       </View>
-      <View>
-        <Text style={{textAlign: 'center', marginTop: 20}}>
-          Didn't receive the OTP? Check your spam or <Text>Resend OTP</Text>
-        </Text>
+      <View style={styles.buttons}>
+      <Button
+        marginTop={10}
+        width="3xs"
+        variant="outline"
+        borderRadius="full"
+        borderColor={'blue.500'}
+        colorScheme={'blue'}
+        >
+        Resend OTP
+      </Button>
+      <Button marginTop={4} width="3xs" variant="outline"
+          borderRadius="full"
+          borderColor={'blue.500'}
+          colorScheme={'blue'}
+          onPress={() => verifyOTP()}
+          >
+        View your Otp
+      </Button>
       </View>
-      <View style={{marginTop: 30, marginHorizontal: 15}}>
-        <Button variant="solid" onPress={() => verifyOTP()}>
-          Verify
-        </Button>
-      </View>
-    </SafeAreaView>
+    </Box>
+    </Box>
   );
 };
-
+const styles = StyleSheet.create({
+  main:{
+    height:"100%",
+    display:"flex",
+    alignItems:"center",
+    alignContent:'center',   
+    justifyContent:"center"
+  },
+  buttons : {
+    display:"flex",
+    borderColor:"pink",
+    marginHorizontal:"5%"
+  },
+  box: {
+    paddingHorizontal: 40,
+    paddingVertical: 50,
+    display: 'flex',
+    // marginVertical:"30%",
+    // marginHorizontal:"1%"
+  },
+  input: {
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+});
 export default OTP;

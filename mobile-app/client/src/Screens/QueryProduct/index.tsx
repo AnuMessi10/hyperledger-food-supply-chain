@@ -50,10 +50,7 @@ const QueryProduct: FC<QueryProductProps> = ({navigation}) => {
               name: '',
             }}
             onSubmit={values => {
-              console.log('====================================');
-              console.log(values);
-              console.log('====================================');
-                navigation.navigate('Register')
+                navigation.navigate('ProductDetails')
             }}>
             {({values, errors, handleSubmit, handleChange, touched}) => {
               return (

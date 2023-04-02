@@ -22,14 +22,14 @@ const AuthStack = () => {
       <Stack.Navigator initialRouteName="Login">
         {/* Auth */}
         <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
-        <Stack.Screen name="OTP" component={OTP} />
+        <Stack.Screen name="OTP" component={OTP} options={{headerShown: false}} />
         <Stack.Screen name="Register" component={Registration} options={{headerShown: false}}/>
         <Stack.Screen name="Landing" component={Landing} options={{headerShown: false}}/>
 
         {/* Product */}
         <Stack.Screen name="CreateProduct" component={CreateProduct} options={{headerShown: false}}/>
         <Stack.Screen name="QueryProduct" component={QueryProduct} options={{headerShown: false}}/>
-        <Stack.Screen name="ProductDetails" component={ProductDetails} />
+        <Stack.Screen name="ProductDetails" component={ProductDetails} options={{headerShown: false}}/>
         <Stack.Screen name="ShipProduct" component={ShipProduct} />
         <Stack.Screen name="ProductionLocation" component={ProductionLocation} />
 

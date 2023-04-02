@@ -6,6 +6,7 @@ import {
   FormControl,
   Text,
   WarningOutlineIcon,
+  Heading,
 } from 'native-base';
 import React, {FC, useContext} from 'react';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
@@ -62,8 +63,10 @@ const Registration: FC<IRegistrationProps> = ({navigation}) => {
   };
 
   return (
-    <View style={{paddingHorizontal: 20}}>
-      <Formik
+    <Box bgColor={'cyan.100'}>
+      <View  style={styles.main}>
+      <Box borderWidth={2}  borderColor={'blue.300'} borderRadius={'lg'} style={styles.box}>
+      <Formik 
         validationSchema={registrationSchema}
         initialValues={{
           name: '',
@@ -75,13 +78,11 @@ const Registration: FC<IRegistrationProps> = ({navigation}) => {
         {({values, errors, handleSubmit, handleChange, touched}) => {
           return (
             <Box>
-              <Box>
-                <Text bold fontSize="xl" mb="4">
-                  Create your account now
-                </Text>
-                <FormControl mb="2" isInvalid={touched.name && !!errors.name}>
+              <Box >
+                <Heading color={'blue.700'} textAlign={'center'} variant="h3" mb="4" >Create your account now</Heading>
+                <FormControl width={'72'} mb="2" isInvalid={touched.name && !!errors.name}>
                   <FormControl.Label>Name</FormControl.Label>
-                  <Input
+                  <Input borderRadius={'lg'} borderColor={'blue.500'}
                     placeholder="Name"
                     type="text"
                     value={values.name}
@@ -97,8 +98,8 @@ const Registration: FC<IRegistrationProps> = ({navigation}) => {
                 <FormControl
                   mb="2"
                   isInvalid={touched.mobile && !!errors.mobile}>
-                  <FormControl.Label>mobile</FormControl.Label>
-                  <Input
+                  <FormControl.Label>Mobile</FormControl.Label>
+                  <Input borderRadius={'lg'} borderColor={'blue.500'}
                     placeholder="Your mobile number"
                     type="text"
                     value={`${values.mobile}`}
@@ -115,7 +116,7 @@ const Registration: FC<IRegistrationProps> = ({navigation}) => {
                   mb="2"
                   isInvalid={touched.password && !!errors.password}>
                   <FormControl.Label>Password</FormControl.Label>
-                  <Input
+                  <Input borderRadius={'lg'} borderColor={'blue.500'}
                     placeholder="Enter your password"
                     type="password"
                     value={values.password}
@@ -129,12 +130,12 @@ const Registration: FC<IRegistrationProps> = ({navigation}) => {
               </Box>
               <Box>
                 <FormControl
-                  mb="2"
+                  mb="10"
                   isInvalid={
                     touched.confirmPassword && !!errors.confirmPassword
                   }>
                   <FormControl.Label>Confirm Password</FormControl.Label>
-                  <Input
+                  <Input borderRadius={'lg'} borderColor={'blue.500'}
                     placeholder="Enter your password again"
                     type="password"
                     value={values.confirmPassword}
@@ -147,70 +148,36 @@ const Registration: FC<IRegistrationProps> = ({navigation}) => {
                 </FormControl>
               </Box>
               <Box>
-                <Button onPress={handleSubmit}>Create your account now</Button>
+                <Button 
+                variant="outline"
+                borderRadius="full"
+                borderColor={'blue.500'}
+                colorScheme={'blue'} mb="4"  
+                onPress={handleSubmit}>Create your account now</Button>
               </Box>
             </Box>
           );
         }}
       </Formik>
-      {/* <Formik
-        initialValues={{
-          name: '',
-          mobile: 0,
-          password: '',
-        }}
-        onSubmit={values => console.log(values)}>
-        {({values, errors, handleSubmit, handleChange}) => {
-          return (
-            <>
-              <View>
-                <View>
-                  <Input
-                    type="text"
-                    placeholder="Enter your name"
-                    onChangeText={e => handleInputChange('name', e)}
-                  />
-                </View>
-                <View style={styles.input}>
-                  <Input
-                    type="text"
-                    placeholder="Enter your mobile number"
-                    onChangeText={e => handleInputChange('mobile', e)}
-                  />
-                </View>
-                <View style={styles.input}>
-                  <Input
-                    type="password"
-                    placeholder="Create a password"
-                    onChangeText={e => handleInputChange('password', e)}
-                  />
-                </View>
-                <View style={styles.input}>
-                  <Input
-                    type="password"
-                    placeholder="Confirm entered password"
-                  />
-                </View>
-              </View>
-              <View>
-                <Button onPress={() => handleRegistration()}>Register</Button>
-              </View>
-            </>
-          );
-        }}
-      </Formik> */}
+      </Box>
     </View>
+    </Box>
   );
 };
 
 const styles = StyleSheet.create({
-  login: {
-    borderWidth: 1,
-    borderColor: 'black',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+  main:{
+    height:"110%",
+    display:"flex",
+    alignItems:"center",
+    alignContent:'center',   
+  },
+  box: {
+    paddingHorizontal: 40,
+    paddingVertical: 50,
     display: 'flex',
-    margin: 5,
+    marginVertical:"30%",
+    marginHorizontal:"1%"
   },
   input: {
     paddingVertical: 10,

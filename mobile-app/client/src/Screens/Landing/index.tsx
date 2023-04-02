@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   root: {
     // minHeight: height - 200,
     height:"110%",
+
   },
   box:{
     display:'flex',
