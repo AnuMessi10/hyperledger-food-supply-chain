@@ -1,11 +1,12 @@
-import {View} from 'react-native';
+import {View, PermissionsAndroid} from 'react-native';
+import Geolocation from 'react-native-geolocation-service';
 import React, {FC} from 'react';
 import {
   Box,
   Button,
   Center,
   FormControl,
-  Image,
+  // Image,
   Input,
   ScrollView,
   Stack,
@@ -16,7 +17,7 @@ import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/t
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {REQUIRED_FIELD_MESSAGE} from '../../../Constants';
-import {launchImageLibrary} from 'react-native-image-picker';
+// import {launchImageLibrary} from 'react-native-image-picker';
 
 export interface CreateProductProps {
   navigation: NativeStackNavigationHelpers;
@@ -33,24 +34,95 @@ const createProductSchema = object({
 });
 
 const CreateProduct: FC<CreateProductProps> = () => {
-  const getProductImage = async (handleChange: any) => {
-    let result = await launchImageLibrary({
-      mediaType: 'photo',
-    });
+  // const getProductImage = async (handleChange: any) => {
+  //   let result = await launchImageLibrary({
+  //     mediaType: 'photo',
+  //   });
 
-    if (!result.didCancel) {
-      if (result.assets !== undefined) {
-        handleChange(result.assets[0].uri);
+  //   if (!result.didCancel) {
+  //     if (result.assets !== undefined) {
+  //       handleChange(result.assets[0].uri);
+  //     }
+  //   }
+  //   // await launchCamera({
+  //   //   mediaType: 'photo',
+  //   // })
+  //   //   .then(result => {
+  //   //     result.assets && handleChange(result.assets[0].uri);
+  //   //     console.log(result);
+  //   //   })
+  //   //   .catch(err => console.error(err));
+  // };
+
+  const requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Geolocation Permission',
+          message: 'Can we access your location?',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      console.log('granted', granted);
+      if (granted === 'granted') {
+        console.log('You can use Geolocation');
+        return true;
+      } else {
+        console.log('You cannot use Geolocation');
+        return false;
       }
+    } catch (err) {
+      return false;
     }
-    // await launchCamera({
-    //   mediaType: 'photo',
-    // })
-    //   .then(result => {
-    //     result.assets && handleChange(result.assets[0].uri);
-    //     console.log(result);
-    //   })
-    //   .catch(err => console.error(err));
+  };
+
+  const getLocation = (handleChange: any) => {
+    const result = requestLocationPermission();
+    result.then(res => {
+      console.log('res is:', res);
+      if (res) {
+        Geolocation.getCurrentPosition(
+          position => {
+            console.log(position);
+            // handleChange({
+            //   lat: position.coords.latitude,
+            //   lng: position.coords.longitude,
+            // });
+          },
+          error => {
+            // See error code charts below.
+            console.log(error.code, error.message);
+          },
+          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+        );
+      }
+    });
+  };
+
+  const handleCreate = (values: any) => {
+    fetch('http://172.31.182.164:5000/api/product/create', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...values,
+        // id: Math.random(),
+        id: Math.floor(Math.random() * 1000),
+        actor: 'PRODUCER',
+      }),
+    })
+      .then(response => response.json())
+      .then(json => {
+        return json;
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
 
   return (
@@ -72,9 +144,13 @@ const CreateProduct: FC<CreateProductProps> = () => {
               name: '',
               quantity: '',
               price: 0,
-              imageUri: '',
+              location: {
+                lat: 19.0,
+                lng: 72.0,
+              },
+              // imageUri: '',
             }}
-            onSubmit={values => console.log(values)}>
+            onSubmit={values => handleCreate(values)}>
             {({values, errors, handleSubmit, handleChange, touched}) => {
               return (
                 <Box>
@@ -143,7 +219,30 @@ const CreateProduct: FC<CreateProductProps> = () => {
                       </FormControl.ErrorMessage>
                     </FormControl>
                   </Box>
-                  <Box>
+                  <Box mb={10}>
+                    <FormControl
+                      isInvalid={touched.location && !!errors.location}>
+                      <FormControl.Label>Location</FormControl.Label>
+                      <FormControl.HelperText mb={5}>
+                        <Text>
+                          Your location is Latitude: {values.location.lat},
+                          Longitude: {values.location.lng}
+                        </Text>
+                      </FormControl.HelperText>
+                      <Center>
+                        <Button
+                          width={'20%'}
+                          onPress={() => getLocation(handleChange('location'))}>
+                          Fetch
+                        </Button>
+                      </Center>
+                      <FormControl.ErrorMessage
+                        leftIcon={<WarningOutlineIcon size="xs" />}>
+                        {errors.price}
+                      </FormControl.ErrorMessage>
+                    </FormControl>
+                  </Box>
+                  {/* <Box>
                     <FormControl mb="6">
                       <FormControl.Label>Image</FormControl.Label>
                       <Center>
@@ -174,7 +273,7 @@ const CreateProduct: FC<CreateProductProps> = () => {
                         </Button>
                       </Center>
                     </FormControl>
-                  </Box>
+                  </Box> */}
                   <Box>
                     <Button onPress={handleSubmit}>Create your product</Button>
                   </Box>

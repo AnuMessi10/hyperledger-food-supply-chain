@@ -39,7 +39,7 @@ const AllProducts: FC<AllProductsProps> = ({navigation}) => {
     <View>
       <Box style={styles.detailsContainer} bgColor={'blueGray.200'}>
         <Text bold fontSize="4xl" marginTop={'3.5'} textAlign={'center'}>
-          Products on the ledger
+          Ledger State
         </Text>
         <View style={{flexDirection: 'row', padding: 5, height: 50}}>
           <View
