@@ -33,7 +33,11 @@ const AuthStack = () => {
         />
         <Stack.Screen name="OTP" component={OTP} />
         <Stack.Screen name="Register" component={Registration} /> */}
-          <Stack.Screen name="Landing" component={Landing} />
+          <Stack.Screen
+            name="Landing"
+            component={Landing}
+            options={{headerShown: false}}
+          />
 
           {/* Product */}
           <Stack.Screen name="CreateProduct" component={CreateProduct} />
