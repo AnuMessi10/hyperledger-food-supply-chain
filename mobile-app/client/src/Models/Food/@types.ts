@@ -1,11 +1,17 @@
 export interface Location {
   lat: number;
   lng: number;
-};
+}
 
-export type Actor = 'PRODUCER' | 'MANUFACTURER' | 'WHOLESALER' | 'DISTRIBUTOR' | 'RETAILER' | 'CONSUMER';
+export type Actor =
+  | 'PRODUCER'
+  | 'MANUFACTURER'
+  | 'WHOLESALER'
+  | 'DISTRIBUTOR'
+  | 'RETAILER'
+  | 'CONSUMER';
 
-export interface Product {
+export interface Food {
   name: string;
   price: number;
   quantity: string;
