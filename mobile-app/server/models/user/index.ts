@@ -27,10 +27,9 @@ const userSchema = new Schema(
       unique: true,
     },
 
-    role: {
+    actor: {
       type: String,
-      enum: ["FARMER", "MANUFACTURER", "DISTRIBUTOR", "RETAILER", "CONSUMER"],
-      default: "CONSUMER",
+      enum: ["PRODUCER", "MANUFACTURER", "DISTRIBUTOR", "RETAILER", "WHOLESALER", "CONSUMER"],
     },
     phoneOtp: Number,
   },
