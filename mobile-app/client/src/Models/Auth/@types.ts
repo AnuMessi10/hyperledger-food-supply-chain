@@ -1,3 +1,5 @@
+import {Actor} from '../Food/@types';
+
 export interface Token {
   accessToken: string;
   userId: string;
@@ -18,7 +20,7 @@ export interface User {
   id: string;
   name: string;
   mobile: number;
-  role: string;
+  actor: Actor;
 }
 
 export interface RegistrationFormData {
@@ -26,6 +28,7 @@ export interface RegistrationFormData {
   mobile: number;
   password: string;
   confirmPassword?: string;
+  actor: Actor;
 }
 
 export interface RegistrationResponse {
