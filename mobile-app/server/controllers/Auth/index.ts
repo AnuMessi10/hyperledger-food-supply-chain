@@ -15,7 +15,7 @@ import {Request, Response, NextFunction} from 'express';
 
 const registerUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { mobile, password, name } = req.body;
+    const { mobile, password, name, actor } = req.body;
     const phoneExist = await User.findOne({ mobile }); // check duplicate mobile Number
 
     if (phoneExist) {
@@ -24,14 +24,14 @@ const registerUser = async (req: Request, res: Response, next: NextFunction) => 
     }
 
     // create new user
-    const createUser = new User({ mobile, name, password, role: "CONSUMER"});
+    const createUser = new User({ mobile, name, password, actor});
     const user = await createUser.save();
 
     res.status(200).json({
       type: "success",
-      message: "Account created, sending OTP to mobile number...",
+      message: "Account created successfully! \nSending OTP to registered mobile number.",
       data: {
-        userId: user._id,
+        id: user._id,
       },
     });
 
@@ -112,7 +112,7 @@ const verifyOtp = async (req: Request, res: Response, next: NextFunction) => {
       message: "OTP verified successfully",
       data: {
         token,
-        userId: user._id,
+        id: user._id,
       },
     });
   } catch (error) {

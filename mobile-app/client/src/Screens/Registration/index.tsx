@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {
   Button,
   Input,
@@ -6,6 +6,8 @@ import {
   FormControl,
   Text,
   WarningOutlineIcon,
+  Select,
+  CheckIcon,
 } from 'native-base';
 import React, {FC, useContext} from 'react';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
@@ -14,12 +16,14 @@ import AuthContext from '../../Navigation/AuthContext';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {REQUIRED_FIELD_MESSAGE} from '../../Constants';
+import AuthModel from '../../Models/Auth';
+import {Actor} from '../../Models/Food/@types';
 
 export interface IRegistrationProps {
   navigation: NativeStackNavigationHelpers;
 }
 
-const {object, string} = Yup;
+const {object, string, ref} = Yup;
 
 const registrationSchema = object({
   name: string().required(REQUIRED_FIELD_MESSAGE),
@@ -29,197 +33,153 @@ const registrationSchema = object({
   password: string().required(REQUIRED_FIELD_MESSAGE),
   confirmPassword: string()
     .required(REQUIRED_FIELD_MESSAGE)
-    .matches(/^[a-z]/, 'Entered Passwords do not match'),
+    .oneOf([ref('password')], 'Passwords must match'),
+  actor: string().required('You need to select a role!'),
 });
 
 const Registration: FC<IRegistrationProps> = ({navigation}) => {
   const {setMobile} = useContext(AuthContext);
 
-  const handleRegistration = (e: {
+  const handleRegistration = async (e: {
     name: string;
     mobile: number;
     password: string;
     confirmPassword: string;
+    actor: Actor;
   }) => {
-    console.log(e);
+    // console.log(e.actor);
     setMobile(e.mobile);
-    fetch('http://localhost:5000/api/auth/register', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(e),
-    })
-      .then(response => response.json())
-      .then(json => {
-        return json;
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    await AuthModel.register(e);
     navigation.navigate('OTP');
   };
 
   return (
-    <View style={{paddingHorizontal: 20}}>
-      <Formik
-        validationSchema={registrationSchema}
-        initialValues={{
-          name: '',
-          mobile: 0,
-          password: '',
-          confirmPassword: '',
-        }}
-        onSubmit={values => handleRegistration(values)}>
-        {({values, errors, handleSubmit, handleChange, touched}) => {
-          return (
-            <Box>
+    <View>
+      <Box px={5}>
+        <Formik
+          validationSchema={registrationSchema}
+          initialValues={{
+            name: '',
+            mobile: '' as unknown as number,
+            password: '',
+            confirmPassword: '',
+            actor: 'CONSUMER' as Actor,
+          }}
+          onSubmit={values => handleRegistration(values)}>
+          {({values, errors, handleSubmit, handleChange, touched}) => {
+            return (
               <Box>
-                <Text bold fontSize="xl" mb="4">
-                  Create your account now
-                </Text>
-                <FormControl mb="2" isInvalid={touched.name && !!errors.name}>
-                  <FormControl.Label>Name</FormControl.Label>
-                  <Input
-                    placeholder="Name"
-                    type="text"
-                    value={values.name}
-                    onChangeText={handleChange('name')}
-                  />
-                  <FormControl.ErrorMessage
-                    leftIcon={<WarningOutlineIcon size="xs" />}>
-                    {errors.name}
-                  </FormControl.ErrorMessage>
-                </FormControl>
+                <Box>
+                  <Text bold fontSize="xl" mb="4">
+                    Create your account now
+                  </Text>
+                  <FormControl mb="2" isInvalid={touched.name && !!errors.name}>
+                    <FormControl.Label>Name</FormControl.Label>
+                    <Input
+                      placeholder="Name"
+                      type="text"
+                      value={values.name}
+                      onChangeText={handleChange('name')}
+                    />
+                    <FormControl.ErrorMessage
+                      leftIcon={<WarningOutlineIcon size="xs" />}>
+                      {errors.name}
+                    </FormControl.ErrorMessage>
+                  </FormControl>
+                </Box>
+                <Box>
+                  <FormControl
+                    mb="2"
+                    isInvalid={touched.mobile && !!errors.mobile}>
+                    <FormControl.Label>Mobile</FormControl.Label>
+                    <Input
+                      placeholder="Your mobile number"
+                      type="text"
+                      value={`${values.mobile}`}
+                      onChangeText={handleChange('mobile')}
+                      keyboardType="numeric"
+                    />
+                    <FormControl.ErrorMessage
+                      leftIcon={<WarningOutlineIcon size="xs" />}>
+                      {errors.mobile}
+                    </FormControl.ErrorMessage>
+                  </FormControl>
+                </Box>
+                <Box>
+                  <FormControl
+                    mb="2"
+                    isInvalid={touched.password && !!errors.password}>
+                    <FormControl.Label>Password</FormControl.Label>
+                    <Input
+                      placeholder="Enter your password"
+                      type="password"
+                      value={values.password}
+                      onChangeText={handleChange('password')}
+                    />
+                    <FormControl.ErrorMessage
+                      leftIcon={<WarningOutlineIcon size="xs" />}>
+                      {errors.password}
+                    </FormControl.ErrorMessage>
+                  </FormControl>
+                </Box>
+                <Box>
+                  <FormControl
+                    mb="2"
+                    isInvalid={
+                      touched.confirmPassword && !!errors.confirmPassword
+                    }>
+                    <FormControl.Label>Confirm Password</FormControl.Label>
+                    <Input
+                      placeholder="Enter your password again"
+                      type="password"
+                      value={values.confirmPassword}
+                      onChangeText={handleChange('confirmPassword')}
+                    />
+                    <FormControl.ErrorMessage
+                      leftIcon={<WarningOutlineIcon size="xs" />}>
+                      {errors.confirmPassword}
+                    </FormControl.ErrorMessage>
+                  </FormControl>
+                </Box>
+                <Box>
+                  <FormControl
+                    mb="2"
+                    isInvalid={touched.actor && !!errors.actor}>
+                    <FormControl.Label>Choose Role</FormControl.Label>
+                    <Select
+                      minWidth="200"
+                      accessibilityLabel="Choose your role"
+                      placeholder="Consumer"
+                      _selectedItem={{
+                        endIcon: <CheckIcon size={5} />,
+                      }}
+                      selectedValue={values.actor}
+                      onValueChange={handleChange('actor')}>
+                      <Select.Item label="Consumer" value="CONSUMER" />
+                      <Select.Item label="Retailer" value="RETAILER" />
+                      <Select.Item label="Wholesaler" value="WHOLESALER" />
+                      <Select.Item label="Distributor" value="DISTRIBUTOR" />
+                      <Select.Item label="Manufacturer" value="MANUFACTURER" />
+                      <Select.Item label="Producer" value="PRODUCER" />
+                    </Select>
+                    <FormControl.ErrorMessage
+                      leftIcon={<WarningOutlineIcon size="xs" />}>
+                      {errors.actor}
+                    </FormControl.ErrorMessage>
+                  </FormControl>
+                </Box>
+                <Box mt="5">
+                  <Button onPress={handleSubmit}>
+                    Create your account now
+                  </Button>
+                </Box>
               </Box>
-              <Box>
-                <FormControl
-                  mb="2"
-                  isInvalid={touched.mobile && !!errors.mobile}>
-                  <FormControl.Label>mobile</FormControl.Label>
-                  <Input
-                    placeholder="Your mobile number"
-                    type="text"
-                    value={`${values.mobile}`}
-                    onChangeText={handleChange('mobile')}
-                  />
-                  <FormControl.ErrorMessage
-                    leftIcon={<WarningOutlineIcon size="xs" />}>
-                    {errors.mobile}
-                  </FormControl.ErrorMessage>
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl
-                  mb="2"
-                  isInvalid={touched.password && !!errors.password}>
-                  <FormControl.Label>Password</FormControl.Label>
-                  <Input
-                    placeholder="Enter your password"
-                    type="password"
-                    value={values.password}
-                    onChangeText={handleChange('password')}
-                  />
-                  <FormControl.ErrorMessage
-                    leftIcon={<WarningOutlineIcon size="xs" />}>
-                    {errors.password}
-                  </FormControl.ErrorMessage>
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl
-                  mb="2"
-                  isInvalid={
-                    touched.confirmPassword && !!errors.confirmPassword
-                  }>
-                  <FormControl.Label>Confirm Password</FormControl.Label>
-                  <Input
-                    placeholder="Enter your password again"
-                    type="password"
-                    value={values.confirmPassword}
-                    onChangeText={handleChange('confirmPassword')}
-                  />
-                  <FormControl.ErrorMessage
-                    leftIcon={<WarningOutlineIcon size="xs" />}>
-                    {errors.confirmPassword}
-                  </FormControl.ErrorMessage>
-                </FormControl>
-              </Box>
-              <Box>
-                <Button onPress={handleSubmit}>Create your account now</Button>
-              </Box>
-            </Box>
-          );
-        }}
-      </Formik>
-      {/* <Formik
-        initialValues={{
-          name: '',
-          mobile: 0,
-          password: '',
-        }}
-        onSubmit={values => console.log(values)}>
-        {({values, errors, handleSubmit, handleChange}) => {
-          return (
-            <>
-              <View>
-                <View>
-                  <Input
-                    type="text"
-                    placeholder="Enter your name"
-                    onChangeText={e => handleInputChange('name', e)}
-                  />
-                </View>
-                <View style={styles.input}>
-                  <Input
-                    type="text"
-                    placeholder="Enter your mobile number"
-                    onChangeText={e => handleInputChange('mobile', e)}
-                  />
-                </View>
-                <View style={styles.input}>
-                  <Input
-                    type="password"
-                    placeholder="Create a password"
-                    onChangeText={e => handleInputChange('password', e)}
-                  />
-                </View>
-                <View style={styles.input}>
-                  <Input
-                    type="password"
-                    placeholder="Confirm entered password"
-                  />
-                </View>
-              </View>
-              <View>
-                <Button onPress={() => handleRegistration()}>Register</Button>
-              </View>
-            </>
-          );
-        }}
-      </Formik> */}
+            );
+          }}
+        </Formik>
+      </Box>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  login: {
-    borderWidth: 1,
-    borderColor: 'black',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    display: 'flex',
-    margin: 5,
-  },
-  input: {
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-});
 
 export default Registration;

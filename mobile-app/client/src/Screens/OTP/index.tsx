@@ -4,6 +4,7 @@ import {Button, Text} from 'native-base';
 import OtpInputs from 'react-native-otp-inputs';
 import AuthContext from '../../Navigation/AuthContext';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
+import AuthModel from '../../Models/Auth';
 
 export interface IOTPProps {
   navigation: NativeStackNavigationHelpers;
@@ -13,27 +14,9 @@ const OTP: FC<IOTPProps> = ({navigation}) => {
   const [otp, setOtp] = useState<number>();
   const {mobile} = useContext(AuthContext);
 
-  const verifyOTP = () => {
-    fetch('http://localhost:5000/api/auth/verifyOtp', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        mobile: mobile,
-        otp: otp,
-      }),
-    })
-      .then(async response => {
-        const data = await response.json();
-        // console.log(data, typeof data, data.type);
-        if (data.type === 'success') {
-          navigation.navigate('Landing');
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  const verifyOTP = async () => {
+    const res = await AuthModel.verifyOTP(mobile, otp ?? 0);
+    res && navigation.navigate('Landing');
   };
 
   return (

@@ -19,7 +19,7 @@ class AuthModel {
     try {
       delete registrationFormData.confirmPassword;
       await request<RegistrationResponse>({
-        url: 'auth/register',
+        url: '/auth/register',
         method: 'post',
         data: registrationFormData,
       });

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {FC, useState} from 'react';
+import AuthModel from '../../Models/Auth';
 
 interface ILoginProps {
   navigation: any;
@@ -17,23 +18,9 @@ const Login: FC<ILoginProps> = ({navigation}) => {
     mobile?: number;
     password?: string;
   }>({});
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // handle login logic
-    fetch('http://localhost:5000/api/auth/login', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formFields),
-    })
-      .then(response => response.json())
-      .then(json => {
-        return json;
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    await AuthModel.login(formFields.mobile ?? -1, formFields.password ?? '');
     navigation.navigate('Landing');
   };
 
@@ -83,7 +70,7 @@ const Login: FC<ILoginProps> = ({navigation}) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.link}
-          onPress={() => navigation.navigate('SignUp')}>
+          onPress={() => navigation.navigate('Register')}>
           <Text style={styles.linkText}>Don't have an account? Sign up</Text>
         </TouchableOpacity>
       </View>

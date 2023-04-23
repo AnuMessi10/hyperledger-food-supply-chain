@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import Login from '../Screens/Login';
-// import OTP from '../Screens/OTP';
-// import Registration from '../Screens/Registration';
+import Login from '../Screens/Login';
+import OTP from '../Screens/OTP';
+import Registration from '../Screens/Registration';
 import AuthContext from './AuthContext';
 import ProductContext from './ProductContext';
 import Landing from '../Screens/Landing';
@@ -24,15 +24,15 @@ const AuthStack = () => {
   return (
     <AuthContext.Provider value={value}>
       <ProductContext.Provider value={productValue}>
-        <Stack.Navigator initialRouteName="Landing">
+        <Stack.Navigator initialRouteName="Login">
           {/* Auth */}
-          {/* <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="OTP" component={OTP} />
-        <Stack.Screen name="Register" component={Registration} /> */}
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen name="OTP" component={OTP} />
+          <Stack.Screen name="Register" component={Registration} />
           <Stack.Screen
             name="Landing"
             component={Landing}
