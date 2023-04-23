@@ -1,5 +1,5 @@
 import {createContext} from 'react';
-import {Product} from '../Models/Product';
+import {Product} from '../Models/Food';
 
 const ProductContext = createContext<{
   product: Product;

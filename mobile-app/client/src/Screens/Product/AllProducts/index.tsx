@@ -3,7 +3,7 @@ import {GestureResponderEvent, StyleSheet, View} from 'react-native';
 import React, {FC, useContext, useEffect, useState} from 'react';
 import {Box, Button, Text} from 'native-base';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
-import {Product} from '../../../Models/Product';
+import {Food} from '../../../Models/Food/@types';
 import ProductContext from '../../../Navigation/ProductContext';
 
 export interface AllProductsProps {
@@ -11,7 +11,7 @@ export interface AllProductsProps {
 }
 
 const AllProducts: FC<AllProductsProps> = ({navigation}) => {
-  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Food[]>([]);
   const {setProduct} = useContext(ProductContext);
 
   useEffect(() => {
@@ -27,11 +27,8 @@ const AllProducts: FC<AllProductsProps> = ({navigation}) => {
       });
   }, []);
 
-  const handleProductLocation = (
-    e: GestureResponderEvent,
-    product: Product,
-  ) => {
-    setProduct({...product});
+  const handleProductLocation = (e: GestureResponderEvent, food: Food) => {
+    setProduct({...food});
     navigation.navigate('ProductLocation');
   };
 
@@ -70,7 +67,7 @@ const AllProducts: FC<AllProductsProps> = ({navigation}) => {
             <Text>Location</Text>
           </View>
         </View>
-        {allProducts.map((item: Product) => (
+        {allProducts.map((item: Food) => (
           <View key={item.name} style={{flexDirection: 'row', padding: 5}}>
             <View
               style={{
