@@ -15,7 +15,7 @@ import {Request, Response, NextFunction} from 'express';
 
 const registerUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { mobile, password, name, actor } = req.body;
+    const { mobile, password, name, actor,imageUrl } = req.body;
     const phoneExist = await User.findOne({ mobile }); // check duplicate mobile Number
 
     if (phoneExist) {
@@ -24,7 +24,7 @@ const registerUser = async (req: Request, res: Response, next: NextFunction) => 
     }
 
     // create new user
-    const createUser = new User({ mobile, name, password, actor});
+    const createUser = new User({ mobile, name, password, actor,imageUrl});
     const user = await createUser.save();
 
     res.status(200).json({

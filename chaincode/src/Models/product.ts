@@ -14,5 +14,5 @@ export interface Product {
         lng: number;
     };
     actor: Actor;
-    // image: Picture;
+    imageUrl : string;
 }

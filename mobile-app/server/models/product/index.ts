@@ -61,6 +61,10 @@ const productSchema = new Schema(
       type: String,
       trim: true,
     },
+    imageUrl: {
+      type: String,
+      trim: true,
+    },
   },
   { timestamps: true }
 );
