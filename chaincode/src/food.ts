@@ -27,6 +27,7 @@ export class FoodContract extends Contract {
             quantity: Product["quantity"];
             location: Product["location"];
             actor: Product["actor"]
+            imageUrl: Product["imageUrl"]
         }[] = [
                 {
                     name: "Apple",
@@ -36,7 +37,8 @@ export class FoodContract extends Contract {
                         lat: 19.5,
                         lng: 72.0,
                     },
-                    actor: "CONSUMER"
+                    actor: "CONSUMER",
+                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.shutterstock.com%2Fimage-photo%2Fripe-apples-display-sale-on-260nw-1822577225.jpg&tbnid=_80h5A5M7JA99M&vet=12ahUKEwjklJH-6sf-AhUZ5HMBHcg9CRAQMygLegUIARCAAg..i&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fapple-carton&docid=iGQDBsh5yQqLEM&w=426&h=280&q=apple%20in%20carton&ved=2ahUKEwjklJH-6sf-AhUZ5HMBHcg9CRAQMygLegUIARCAAg"
                 },
                 {
                     name: "Honey",
@@ -47,7 +49,8 @@ export class FoodContract extends Contract {
                         lng: -30.0,
                     },
 
-                    actor: "CONSUMER"
+                    actor: "CONSUMER",
+                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Jam",
@@ -58,7 +61,8 @@ export class FoodContract extends Contract {
                         lng: 10.1,
                     },
 
-                    actor: "CONSUMER"
+                    actor: "CONSUMER",
+                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Mango",
@@ -68,7 +72,8 @@ export class FoodContract extends Contract {
                         lat: 21.01,
                         lng: 72.0,
                     },
-                    actor: "PRODUCER"
+                    actor: "PRODUCER",
+                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Grapes",
@@ -78,7 +83,8 @@ export class FoodContract extends Contract {
                         lat: 25.44,
                         lng: 91.0,
                     },
-                    actor: "RETAILER"
+                    actor: "RETAILER",
+                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Onion",
@@ -88,7 +94,8 @@ export class FoodContract extends Contract {
                         lat: 12.45,
                         lng: 27.0,
                     },
-                    actor: "CONSUMER"
+                    actor: "CONSUMER",
+                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Oranges",
@@ -98,7 +105,8 @@ export class FoodContract extends Contract {
                         lat: 86.5,
                         lng: 31.01,
                     },
-                    actor: "CONSUMER"
+                    actor: "CONSUMER",
+                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Cheese",
@@ -108,7 +116,8 @@ export class FoodContract extends Contract {
                         lat: 56.65,
                         lng: 45.12,
                     },
-                    actor: "CONSUMER"
+                    actor: "CONSUMER",
+                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
             ];
 
@@ -144,7 +153,8 @@ export class FoodContract extends Contract {
         quantity: Product["quantity"],
         price: Product["price"],
         location: Product["location"],
-        actor: Product["actor"]
+        actor: Product["actor"],
+        imageUrl: Product["imageUrl"]
     ) {
         console.info("============= Start : Create Product ===========");
 
@@ -159,7 +169,8 @@ export class FoodContract extends Contract {
             quantity,
             price,
             location,
-            actor
+            actor,
+            imageUrl,
         };
 
         await ctx.stub.putState(id, Buffer.from(JSON.stringify(product)));
@@ -232,6 +243,7 @@ export class FoodContract extends Contract {
         name: Product["name"],
         location: Product["location"],
         actor: Product["actor"],
+        imageUrl:Product["imageUrl"]
     ): Promise<void> {
 
         console.info("============= Start : Update Product ===========");
@@ -248,7 +260,8 @@ export class FoodContract extends Contract {
             price,
             name,
             location,
-            actor
+            actor,
+            imageUrl
         };
 
         console.info("============= End : Update Product ===========");
@@ -292,7 +305,7 @@ export class FoodContract extends Contract {
         asset.actor = newActor;
 
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-        await this.UpdateProduct(ctx, id, asset.quantity, asset.price, asset.name, asset.location, newActor);
+        await this.UpdateProduct(ctx, id, asset.quantity, asset.price, asset.name, asset.location, newActor,asset.imageUrl);
 
         console.info("============= End : Transfer Product ===========");
 

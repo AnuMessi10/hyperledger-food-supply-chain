@@ -7,7 +7,7 @@ const createProduct = async (req: any, res: Response, next: NextFunction) => {
     return res.status(400).json({ message: "Missing request body" });
   }
 
-  const { name, id, price, quantity, location, actor, contract } = req.body;
+  const { name, id, price, quantity, location, actor, contract,imageUrl } = req.body;
 
   const resultBytes = await contract.submitTransaction(
     "CreateProduct",
@@ -16,12 +16,13 @@ const createProduct = async (req: any, res: Response, next: NextFunction) => {
     quantity,
     price,
     location,
-    actor
+    actor,
+    imageUrl
   );
 
   const result = resultBytes.toString();
 
-  res.status(201).json({ message: `Product with ${id} updated successfully`, product: result });
+  res.status(201).json({ message: `Product with id: ${id} created successfully`, product: result });
 };
 
 // --------------------- Get All Products ---------------------------------
@@ -77,7 +78,7 @@ const updateProduct = async (req: any, res: Response, next: NextFunction) => {
       return res.status(400).json({ message: "Missing request body" });
     }
 
-    const { contract, quantity, price, name, location, actor } = req.body;
+    const { contract, quantity, price, name, location, actor,imageUrl } = req.body;
 
     const { id } = req.params;
 
@@ -88,7 +89,8 @@ const updateProduct = async (req: any, res: Response, next: NextFunction) => {
       price,
       name,
       location,
-      actor
+      actor,
+      imageUrl
     );
     const resultStringified = resultBytes.toString();
     const resultParsed = JSON.parse(resultStringified);
