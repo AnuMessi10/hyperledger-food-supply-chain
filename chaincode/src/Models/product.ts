@@ -4,15 +4,20 @@
 
 export type Actor = "PRODUCER" | "MANUFACTURER" | "WHOLESALER" | "DISTRIBUTOR" | "RETAILER" | "CONSUMER";
 
+export type Location = {
+    lat: number;
+    lng: number;
+}
+
 export interface Product {
     id: string;
     name: string;
     price: number;
     quantity: string;
     location: {
-        lat: number;
-        lng: number;
-    };
+        prev?: Location | Location[];
+        current: Location;
+    } ;
     actor: Actor;
     imageUrl : string;
 }

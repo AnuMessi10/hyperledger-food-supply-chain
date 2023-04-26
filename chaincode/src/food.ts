@@ -34,19 +34,59 @@ export class FoodContract extends Contract {
                     quantity: "100 cartons",
                     price: 30,
                     location: {
-                        lat: 19.5,
-                        lng: 72.0,
+                        prev: [
+                            {
+                                lat: 13.082680,
+                                lng: 80.270721 // Chennai
+                            },
+                            {
+                                lat: 11.664325,
+                                lng: 78.146011 // Tamil Nadu agricultural area
+                            },
+                            {
+                                lat: 20.593683,
+                                lng: 78.962883 // Maharashtra agricultural area
+                            },
+                            {
+                                lat: 19.076090,
+                                lng: 72.877426 // Mumbai
+                            },
+                        ],
+                        current: {
+                            lat: 22.572646,
+                            lng: 88.363895 // Kolkata
+                        }
                     },
                     actor: "CONSUMER",
-                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.shutterstock.com%2Fimage-photo%2Fripe-apples-display-sale-on-260nw-1822577225.jpg&tbnid=_80h5A5M7JA99M&vet=12ahUKEwjklJH-6sf-AhUZ5HMBHcg9CRAQMygLegUIARCAAg..i&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fapple-carton&docid=iGQDBsh5yQqLEM&w=426&h=280&q=apple%20in%20carton&ved=2ahUKEwjklJH-6sf-AhUZ5HMBHcg9CRAQMygLegUIARCAAg"
+                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.shutterstock.com%2Fimage-photo%2Fripe-apples-display-sale-on-260nw-1822577225.jpg&tbnid=_80h5A5M7JA99M&vet=12ahUKEwjklJH-6sf-AhUZ5HMBHcg9CRAQMygLegUIARCAAg..i&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fapple-carton&docid=iGQDBsh5yQqLEM&w=426&h=280&q=apple%20in%20carton&ved=2ahUKEwjklJH-6sf-AhUZ5HMBHcg9CRAQMygLegUIARCAAg"
                 },
                 {
                     name: "Honey",
                     quantity: "500 jars",
                     price: 350,
                     location: {
-                        lat: 20.0,
-                        lng: -30.0,
+                        prev: [
+                            {
+                                lat: 28.704060,
+                                lng: 77.102493 // Delhi
+                            },
+                            {
+                                lat: 28.207609,
+                                lng: 76.826957 // Haryana agricultural area
+                            },
+                            {
+                                lat: 12.971599,
+                                lng: 77.594566 // Bangalore
+                            },
+                            {
+                                lat: 11.664325,
+                                lng: 78.146011 // Tamil Nadu agricultural area
+                            },
+                        ],
+                        current: {
+                            lat: 17.385044,
+                            lng: 78.486671 // Hyderabad
+                        }
                     },
 
                     actor: "CONSUMER",
@@ -57,67 +97,141 @@ export class FoodContract extends Contract {
                     quantity: "1000 bottles",
                     price: 60,
                     location: {
-                        lat: 50.0,
-                        lng: 10.1,
+                        prev: [
+                            {
+                                lat: 22.986757,
+                                lng: 87.854976 // West Bengal agricultural area
+                            },
+                            {
+                                lat: 19.076090,
+                                lng: 72.877426 // Mumbai
+                            },
+                            {
+                                lat: 21.170240,
+                                lng: 72.831062 // Gujarat agricultural area
+                            },
+                        ],
+                        current: {
+                            lat: 28.704060,
+                            lng: 77.102493 // Delhi
+                        }
                     },
 
-                    actor: "CONSUMER",
-                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    actor: "WHOLESALER",
+                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Mango",
                     quantity: "20 boxes",
                     price: 450,
                     location: {
-                        lat: 21.01,
-                        lng: 72.0,
+                        current: {
+                            lat: 20.01,
+                            lng: 71.0
+                        }
                     },
                     actor: "PRODUCER",
-                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Grapes",
                     quantity: "25kgs",
                     price: 125,
                     location: {
-                        lat: 25.44,
-                        lng: 91.0,
+                        prev: [
+                            {
+                                lat: -59.894396,
+                                lng: 12.114916
+                            },
+                            {
+                                lat: 23.158436,
+                                lng: 19.244897
+                            },
+                        ],
+                        current: {
+                            lat: 83.994734,
+                            lng: 36.786389
+                        }
                     },
                     actor: "RETAILER",
-                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Onion",
                     quantity: "1000 kgs",
                     price: 25,
                     location: {
-                        lat: 12.45,
-                        lng: 27.0,
+                        prev: [
+                            {
+                                lat: 19.076090,
+                                lng: 72.877426 // Mumbai
+                            },
+                            {
+                                lat: 20.593683,
+                                lng: 78.962883 // Maharashtra agricultural area
+                            },
+                            {
+                                lat: 17.385044,
+                                lng: 78.486671 // Hyderabad
+                            },
+                            {
+                                lat: 16.506174,
+                                lng: 80.648015 // Andhra Pradesh agricultural area
+                            },
+                        ],
+                        current: {
+                            lat: 13.082680,
+                            lng: 80.270721 // Chennai
+                        }
                     },
                     actor: "CONSUMER",
-                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Oranges",
                     quantity: "10kgs",
-                    price:100,
+                    price: 100,
                     location: {
-                        lat: 86.5,
-                        lng: 31.01,
+                        prev: [
+                            {
+                                lat: 43.894396,
+                                lng: 92.114916
+                            },
+                        ],
+                        current: {
+                            lat: 73.994734,
+                            lng: 16.786389
+                        }
                     },
                     actor: "CONSUMER",
-                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
                 {
                     name: "Cheese",
                     quantity: "25 boxes",
                     price: 183,
                     location: {
-                        lat: 56.65,
-                        lng: 45.12,
+                        prev: [
+                            {
+                                lat: 10.894396,
+                                lng: 41.114916
+                            },
+                            {
+                                lat: 98.158436,
+                                lng: 12.244897
+                            },
+                            {
+                                lat: -15.302023,
+                                lng: 89.650272
+                            },
+                        ],
+                        current: {
+                            lat: -19.994734,
+                            lng: 99.786389
+                        }
                     },
                     actor: "CONSUMER",
-                    imageUrl:"https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
                 },
             ];
 
@@ -152,7 +266,7 @@ export class FoodContract extends Contract {
         id: Product["id"],
         quantity: Product["quantity"],
         price: Product["price"],
-        location: Product["location"],
+        { current, prev }: Product["location"],
         actor: Product["actor"],
         imageUrl: Product["imageUrl"]
     ) {
@@ -168,7 +282,10 @@ export class FoodContract extends Contract {
             name,
             quantity,
             price,
-            location,
+            location: {
+                current,
+                prev
+            },
             actor,
             imageUrl,
         };
@@ -241,9 +358,9 @@ export class FoodContract extends Contract {
         quantity: Product["quantity"],
         price: Product["price"],
         name: Product["name"],
-        location: Product["location"],
+        { current, prev }: Product["location"],
         actor: Product["actor"],
-        imageUrl:Product["imageUrl"]
+        imageUrl: Product["imageUrl"]
     ): Promise<void> {
 
         console.info("============= Start : Update Product ===========");
@@ -259,7 +376,10 @@ export class FoodContract extends Contract {
             quantity,
             price,
             name,
-            location,
+            location: {
+                current,
+                prev
+            },
             actor,
             imageUrl
         };
@@ -305,7 +425,7 @@ export class FoodContract extends Contract {
         asset.actor = newActor;
 
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-        await this.UpdateProduct(ctx, id, asset.quantity, asset.price, asset.name, asset.location, newActor,asset.imageUrl);
+        await this.UpdateProduct(ctx, id, asset.quantity, asset.price, asset.name, asset.location, newActor, asset.imageUrl);
 
         console.info("============= End : Transfer Product ===========");
 
