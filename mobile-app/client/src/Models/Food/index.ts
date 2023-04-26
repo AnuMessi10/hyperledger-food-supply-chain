@@ -26,6 +26,14 @@ class FoodModel {
     });
     return res;
   };
+
+  static getAllProducts = async () => {
+    const res = await request<Food[]>({
+      url: '/product/get/all',
+      method: 'GET',
+    });
+    return res;
+  };
 }
 
 export default FoodModel;

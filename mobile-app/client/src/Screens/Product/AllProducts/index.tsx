@@ -5,6 +5,7 @@ import {Box, Button, Text} from 'native-base';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 import {Food} from '../../../Models/Food/@types';
 import ProductContext from '../../../Navigation/ProductContext';
+import FoodModel from '../../../Models/Food';
 
 export interface AllProductsProps {
   navigation: NativeStackNavigationHelpers;
@@ -15,16 +16,11 @@ const AllProducts: FC<AllProductsProps> = ({navigation}) => {
   const {setProduct} = useContext(ProductContext);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/product/get/all', {
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then(json => {
-        setAllProducts(json);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    const init = async () => {
+      const foodProducts = await FoodModel.getAllProducts();
+      setAllProducts(foodProducts);
+    };
+    init();
   }, []);
 
   const handleProductLocation = (e: GestureResponderEvent, food: Food) => {
