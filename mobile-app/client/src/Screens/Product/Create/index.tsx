@@ -1,12 +1,13 @@
-import {View, PermissionsAndroid} from 'react-native';
+import {View, PermissionsAndroid, StyleSheet, Alert} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {
   Box,
   Button,
   Center,
   FormControl,
-  // Image,
+  Icon,
+  Image,
   Input,
   ScrollView,
   Stack,
@@ -17,7 +18,9 @@ import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/t
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {REQUIRED_FIELD_MESSAGE} from '../../../Constants';
-// import {launchImageLibrary} from 'react-native-image-picker';
+import FoodModel from '../../../Models/Food';
+import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
+import {Location} from '../../../Models/Food/@types';
 
 export interface CreateProductProps {
   navigation: NativeStackNavigationHelpers;
@@ -31,28 +34,65 @@ const createProductSchema = object({
   price: number()
     .required(REQUIRED_FIELD_MESSAGE)
     .positive('Please enter a valid price!'),
+  location: object({
+    lat: number().required('Invalid coordinate type, try again'),
+    lng: number().required('Invalid coordinate type, try again'),
+  }).required('Please allow access to your location coordinates'),
+  imageUri: string().required(
+    'You need to provide an image of the product before proceeding!',
+  ),
 });
 
 const CreateProduct: FC<CreateProductProps> = () => {
-  // const getProductImage = async (handleChange: any) => {
-  //   let result = await launchImageLibrary({
-  //     mediaType: 'photo',
-  //   });
+  const [cloudinaryUrl, setCloudinaryUrl] = useState<string>();
 
-  //   if (!result.didCancel) {
-  //     if (result.assets !== undefined) {
-  //       handleChange(result.assets[0].uri);
-  //     }
-  //   }
-  //   // await launchCamera({
-  //   //   mediaType: 'photo',
-  //   // })
-  //   //   .then(result => {
-  //   //     result.assets && handleChange(result.assets[0].uri);
-  //   //     console.log(result);
-  //   //   })
-  //   //   .catch(err => console.error(err));
-  // };
+  const getProductImage = async (
+    handleChange: any,
+    source: 'gallery' | 'camera',
+  ) => {
+    let result;
+    if (source === 'gallery') {
+      result = await launchImageLibrary({
+        mediaType: 'photo',
+      });
+    } else {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: 'App Camera Permission',
+          message: 'FoodNet needs access to your camera ',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        result = await launchCamera({
+          mediaType: 'photo',
+        });
+      }
+    }
+
+    if (result && !result.didCancel) {
+      if (result.assets !== undefined) {
+        const uri = result.assets[0].uri;
+        const type = 'image/jpg';
+        const name = result.assets[0].fileName;
+        const src = {uri, type, name};
+        uploadToCloudinary(src);
+        handleChange(uri);
+      }
+    }
+  };
+
+  const uploadToCloudinary = async (photo: any) => {
+    const data = new FormData();
+    data.append('file', photo);
+    data.append('upload_preset', 'foodsupplychain');
+    data.append('cloud_name', 'foodsupplychain');
+    const getUploadInfo = await FoodModel.imgToCloudinary(data);
+    setCloudinaryUrl(getUploadInfo.url);
+  };
 
   const requestLocationPermission = async () => {
     try {
@@ -66,12 +106,10 @@ const CreateProduct: FC<CreateProductProps> = () => {
           buttonPositive: 'OK',
         },
       );
-      console.log('granted', granted);
       if (granted === 'granted') {
-        console.log('You can use Geolocation');
         return true;
       } else {
-        console.log('You cannot use Geolocation');
+        Alert.alert('Location Permission Denied');
         return false;
       }
     } catch (err) {
@@ -82,19 +120,14 @@ const CreateProduct: FC<CreateProductProps> = () => {
   const getLocation = (handleChange: any) => {
     const result = requestLocationPermission();
     result.then(res => {
-      console.log('res is:', res);
       if (res) {
         Geolocation.getCurrentPosition(
           position => {
-            console.log(position);
-            // handleChange({
-            //   lat: position.coords.latitude,
-            //   lng: position.coords.longitude,
-            // });
+            console.log(position.coords);
           },
           error => {
             // See error code charts below.
-            console.log(error.code, error.message);
+            console.error(error.code, error.message);
           },
           {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
         );
@@ -102,27 +135,13 @@ const CreateProduct: FC<CreateProductProps> = () => {
     });
   };
 
-  const handleCreate = (values: any) => {
-    fetch('http://172.31.182.164:5000/api/product/create', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...values,
-        // id: Math.random(),
-        id: Math.floor(Math.random() * 1000),
-        actor: 'PRODUCER',
-      }),
-    })
-      .then(response => response.json())
-      .then(json => {
-        return json;
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  const handleCreate = async (values: any) => {
+    await FoodModel.createProduct({
+      ...values,
+      imageUrl: cloudinaryUrl,
+      id: Math.floor(Math.random() * 1000),
+      actor: 'PRODUCER',
+    });
   };
 
   return (
@@ -145,17 +164,17 @@ const CreateProduct: FC<CreateProductProps> = () => {
               quantity: '',
               price: 0,
               location: {
-                lat: 19.0,
-                lng: 72.0,
-              },
-              // imageUri: '',
+                lat: 19.04,
+                lng: 72.84,
+              } as Location,
+              imageUri: '',
             }}
             onSubmit={values => handleCreate(values)}>
             {({values, errors, handleSubmit, handleChange, touched}) => {
               return (
                 <Box>
                   <Box>
-                    <Text bold fontSize="xl" mb="4">
+                    <Text bold fontSize="xl" mb="2">
                       Add your product details below
                     </Text>
                     <FormControl
@@ -201,7 +220,7 @@ const CreateProduct: FC<CreateProductProps> = () => {
                   </Box>
                   <Box>
                     <FormControl
-                      mb="2"
+                      mb="0"
                       isInvalid={touched.price && !!errors.price}>
                       <FormControl.Label>Price</FormControl.Label>
                       <Input
@@ -219,61 +238,97 @@ const CreateProduct: FC<CreateProductProps> = () => {
                       </FormControl.ErrorMessage>
                     </FormControl>
                   </Box>
-                  <Box mb={10}>
+                  <Box mb={2}>
                     <FormControl
                       isInvalid={touched.location && !!errors.location}>
                       <FormControl.Label>Location</FormControl.Label>
-                      <FormControl.HelperText mb={5}>
-                        <Text>
-                          Your location is Latitude: {values.location.lat},
-                          Longitude: {values.location.lng}
-                        </Text>
+                      <FormControl.HelperText mb={3} mt={0}>
+                        {values.location.lat ? (
+                          <Text>
+                            Your location is Latitude: {values.location.lat},
+                            Longitude: {values.location.lng}
+                          </Text>
+                        ) : (
+                          <Text>
+                            Please tap the button below to fetch your location
+                          </Text>
+                        )}
                       </FormControl.HelperText>
                       <Center>
                         <Button
                           width={'20%'}
-                          onPress={() => getLocation(handleChange('location'))}>
+                          onPress={() => getLocation(handleChange)}>
                           Fetch
                         </Button>
                       </Center>
                       <FormControl.ErrorMessage
                         leftIcon={<WarningOutlineIcon size="xs" />}>
-                        {errors.price}
+                        {errors.location?.lat}
                       </FormControl.ErrorMessage>
                     </FormControl>
                   </Box>
-                  {/* <Box>
-                    <FormControl mb="6">
-                      <FormControl.Label>Image</FormControl.Label>
+                  <Box>
+                    <FormControl
+                      mb="6"
+                      isInvalid={touched.imageUri && !!errors.imageUri}>
+                      <FormControl.Label>
+                        Upload Image (Gallery or Camera)
+                      </FormControl.Label>
                       <Center>
-                        <Button
-                          variant={'unstyled'}
-                          onPress={() =>
-                            getProductImage(handleChange('imageUri'))
-                          }>
+                        <Box mt={2}>
                           {values.imageUri ? (
-                            <Image
-                              source={{
-                                uri: values.imageUri,
-                              }}
-                              alt="product-image"
-                              height={125}
-                              width={125}
-                            />
+                            <>
+                              <Image
+                                source={{
+                                  uri: values.imageUri,
+                                }}
+                                alt="product-image"
+                                height={125}
+                                width={125}
+                              />
+                              <Button
+                                variant="outline"
+                                style={styles.closeBtn}
+                                onPress={() => handleChange('imageUri')}>
+                                <Icon name="close" />
+                              </Button>
+                            </>
                           ) : (
-                            <Image
-                              source={{
-                                uri: 'http://via.placeholder.com/125x125',
-                              }}
-                              alt="product-image"
-                              height={125}
-                              width={125}
-                            />
+                            <Box style={styles.imageOptions}>
+                              <Box>
+                                <Button
+                                  style={styles.imgOptionBtn}
+                                  onPress={() =>
+                                    getProductImage(
+                                      handleChange('imageUri'),
+                                      'gallery',
+                                    )
+                                  }>
+                                  From Gallery
+                                </Button>
+                              </Box>
+                              <Box>
+                                <Button
+                                  style={styles.imgOptionBtn}
+                                  onPress={() =>
+                                    getProductImage(
+                                      handleChange('imageUri'),
+                                      'camera',
+                                    )
+                                  }>
+                                  From Camera
+                                </Button>
+                              </Box>
+                            </Box>
                           )}
-                        </Button>
+                        </Box>
                       </Center>
+                      <FormControl.ErrorMessage
+                        leftIcon={<WarningOutlineIcon size="xs" />}>
+                        {errors.imageUri}
+                      </FormControl.ErrorMessage>
                     </FormControl>
-                  </Box> */}
+                  </Box>
                   <Box>
                     <Button onPress={handleSubmit}>Create your product</Button>
                   </Box>
@@ -286,5 +341,27 @@ const CreateProduct: FC<CreateProductProps> = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  imageOptions: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  closeBtn: {
+    position: 'absolute',
+    top: -10,
+    right: -10,
+    width: 15,
+    height: 20,
+    borderRadius: 9999,
+  },
+  imgOptionBtn: {
+    width: 60,
+    height: 60,
+    borderRadius: 10,
+    marginHorizontal: 20,
+  },
+});
 
 export default CreateProduct;

@@ -1,71 +1,31 @@
 import {request} from '../../Utilities/axiosUtils';
-import {Token} from '../Auth/@types';
+import {Food, FoodImageUploadResponse} from '../Food/@types';
 
-class UserModel {
-  static isRegistered = (email: string) =>
-    request({url: 'users/is-registered', params: {email}});
-
-  static login = async (credentials: {email: string; password: string}) => {
-    const data = await request<any>({
-      url: '/users/login',
-      method: 'post',
-      data: {...credentials, email: credentials.email.toLowerCase()},
-    }).catch(err => {
-      throw err;
-    });
-
-    const Token: Token = {
-      accessToken: data.id,
-      userId: data.userId,
-      ttl: data.ttl,
-      created: data.created,
-    };
-
-    return Token;
-  };
-
-  static logOut = async () => {
-    let resp;
+class FoodModel {
+  static createProduct = async (data: Food) => {
     try {
-      resp = await request({
-        url: '/users/logout',
-        method: 'post',
+      await request({
+        url: '/product/create',
+        method: 'POST',
+        data: data,
       });
     } catch (error) {
       throw error;
     }
-    return resp;
   };
 
-  static signUp = async (formData: SignUpForm) => {
-    delete formData.repeatPassword;
-    const res = await request({
-      url: 'users/signUpAuth',
-      method: 'post',
-      data: parseUserFormData(formData),
+  static imgToCloudinary = async (data: FormData) => {
+    const res = await request<FoodImageUploadResponse>({
+      url: 'https://api.cloudinary.com/v1_1/foodsupplychain/image/upload',
+      method: 'POST',
+      data: data,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
     });
-    return {...parseUser(res), accessToken: res.accessToken};
-  };
-
-  static verifyToken = async (formData: {email: string; token: string}) => {
-    const res = await request({
-      url: 'users/verifyToken',
-      method: 'post',
-      data: formData,
-    });
-    return {...parseUser(res), accessToken: res.accessToken};
-  };
-
-  static sendToken = (data: {phone: Phone} | {email: string}) =>
-    request({url: 'users/sendToken', method: 'post', data});
-
-  static getUser = async (userId: string) => {
-    const res = await request({
-      url: `users/${userId}`,
-      params: {filter: {include: 'roles'}},
-    });
-    return parseUser(res) as User;
+    return res;
   };
 }
 
-export default UserModel;
+export default FoodModel;
