@@ -16,7 +16,10 @@ export interface Food {
   price: number;
   quantity: string;
   imageUrl: string;
-  location: Location;
+  location: {
+    prev?: Location | Location[];
+    current: Location;
+  };
   actor: Actor;
   id: string;
 }
