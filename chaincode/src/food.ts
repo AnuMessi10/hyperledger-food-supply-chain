@@ -138,8 +138,20 @@ export class FoodContract extends Contract {
                     quantity: "25kgs",
                     price: 125,
                     location: {
-                        lat: 25.44,
-                        lng: 91.0,
+                        prev: [
+                            {
+                                lat: -59.894396,
+                                lng: 12.114916
+                            },
+                            {
+                                lat: 23.158436,
+                                lng: 19.244897
+                            },
+                        ],
+                        current: {
+                            lat: 83.994734,
+                            lng: 36.786389
+                        }
                     },
                     actor: "RETAILER",
                     imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
@@ -149,8 +161,24 @@ export class FoodContract extends Contract {
                     quantity: "1000 kgs",
                     price: 25,
                     location: {
-                        lat: 12.45,
-                        lng: 27.0,
+                        prev: [
+                            {
+                                lat: 45.894396,
+                                lng: 42.114916
+                            },
+                            {
+                                lat: 63.158436,
+                                lng: -29.244897
+                            },
+                            {
+                                lat: 15.302023,
+                                lng: 69.650272
+                            },
+                        ],
+                        current: {
+                            lat: 73.994734,
+                            lng: 69.786389
+                        }
                     },
                     actor: "CONSUMER",
                     imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
@@ -160,8 +188,16 @@ export class FoodContract extends Contract {
                     quantity: "10kgs",
                     price: 100,
                     location: {
-                        lat: 86.5,
-                        lng: 31.01,
+                        prev: [
+                            {
+                                lat: 43.894396,
+                                lng: 92.114916
+                            },
+                        ],
+                        current: {
+                            lat: 73.994734,
+                            lng: 16.786389
+                        }
                     },
                     actor: "CONSUMER",
                     imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
@@ -171,8 +207,24 @@ export class FoodContract extends Contract {
                     quantity: "25 boxes",
                     price: 183,
                     location: {
-                        lat: 56.65,
-                        lng: 45.12,
+                        prev: [
+                            {
+                                lat: 10.894396,
+                                lng: 41.114916
+                            },
+                            {
+                                lat: 98.158436,
+                                lng: 12.244897
+                            },
+                            {
+                                lat: -15.302023,
+                                lng: 89.650272
+                            },
+                        ],
+                        current: {
+                            lat: -19.994734,
+                            lng: 99.786389
+                        }
                     },
                     actor: "CONSUMER",
                     imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
