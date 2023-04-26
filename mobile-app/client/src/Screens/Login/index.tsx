@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React, {FC, useState} from 'react';
 import AuthModel from '../../Models/Auth';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 interface ILoginProps {
   navigation: any;
@@ -57,7 +58,9 @@ const Login: FC<ILoginProps> = ({navigation}) => {
           <TouchableOpacity
             style={styles.iconContainer}
             onPress={() => setShowPassword(!showPassword)}>
-            <Text style={styles.icon}>{showPassword ? 'HIDE' : 'SHOW'}</Text>
+            <Text style={styles.icon}>
+              {showPassword ? <Icon name="eye-slash" /> : <Icon name="eye" />}
+            </Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
