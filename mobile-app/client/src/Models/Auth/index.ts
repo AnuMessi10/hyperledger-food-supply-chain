@@ -15,14 +15,15 @@ class AuthModel {
 
   static register = async (
     registrationFormData: RegistrationFormData,
-  ): Promise<void> => {
+  ): Promise<boolean> => {
     try {
       delete registrationFormData.confirmPassword;
-      await request<RegistrationResponse>({
+      const res = await request<RegistrationResponse>({
         url: '/auth/register',
         method: 'post',
         data: registrationFormData,
       });
+      return res.type === 'success';
     } catch (error) {
       throw error;
     }
