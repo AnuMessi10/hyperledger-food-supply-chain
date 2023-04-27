@@ -58,7 +58,7 @@ export class FoodContract extends Contract {
                         }
                     },
                     actor: "CONSUMER",
-                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.shutterstock.com%2Fimage-photo%2Fripe-apples-display-sale-on-260nw-1822577225.jpg&tbnid=_80h5A5M7JA99M&vet=12ahUKEwjklJH-6sf-AhUZ5HMBHcg9CRAQMygLegUIARCAAg..i&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fapple-carton&docid=iGQDBsh5yQqLEM&w=426&h=280&q=apple%20in%20carton&ved=2ahUKEwjklJH-6sf-AhUZ5HMBHcg9CRAQMygLegUIARCAAg"
+                    imageUrl: "https://res.cloudinary.com/foodsupplychain/image/upload/v1682576244/IMG-20230427-WA0015_fkq0w1.jpg"
                 },
                 {
                     name: "Honey",
@@ -90,7 +90,7 @@ export class FoodContract extends Contract {
                     },
 
                     actor: "CONSUMER",
-                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://res.cloudinary.com/foodsupplychain/image/upload/v1682576242/IMG-20230427-WA0011_yhxaru.jpg"
                 },
                 {
                     name: "Jam",
@@ -118,7 +118,7 @@ export class FoodContract extends Contract {
                     },
 
                     actor: "WHOLESALER",
-                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://res.cloudinary.com/foodsupplychain/image/upload/v1682576242/IMG-20230427-WA0014_nqgsym.jpg"
                 },
                 {
                     name: "Mango",
@@ -131,7 +131,7 @@ export class FoodContract extends Contract {
                         }
                     },
                     actor: "PRODUCER",
-                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://res.cloudinary.com/foodsupplychain/image/upload/v1682576242/IMG-20230427-WA0008_ughnqi.jpg"
                 },
                 {
                     name: "Grapes",
@@ -154,7 +154,7 @@ export class FoodContract extends Contract {
                         }
                     },
                     actor: "RETAILER",
-                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://res.cloudinary.com/foodsupplychain/image/upload/v1682576246/IMG-20230427-WA0009_cjdlg1.jpg"
                 },
                 {
                     name: "Onion",
@@ -185,7 +185,7 @@ export class FoodContract extends Contract {
                         }
                     },
                     actor: "CONSUMER",
-                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://res.cloudinary.com/foodsupplychain/image/upload/v1682576241/IMG-20230427-WA0013_fsaqpg.jpg"
                 },
                 {
                     name: "Oranges",
@@ -204,7 +204,7 @@ export class FoodContract extends Contract {
                         }
                     },
                     actor: "CONSUMER",
-                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://res.cloudinary.com/foodsupplychain/image/upload/v1682576246/IMG-20230427-WA0018_jku0ex.jpg"
                 },
                 {
                     name: "Cheese",
@@ -231,7 +231,7 @@ export class FoodContract extends Contract {
                         }
                     },
                     actor: "CONSUMER",
-                    imageUrl: "https://www.google.com/imgres?imgurl=https%3A%2F%2F5.imimg.com%2Fdata5%2FCJ%2FGC%2FWB%2FSELLER-1177031%2Fwooden-beehive-box-500x500.jpg&tbnid=fQ3GXsWFhXD6pM&vet=12ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg..i&imgrefurl=https%3A%2F%2Fwww.indiamart.com%2Fproddetail%2Fwooden-beehive-box-with-honey-bees-20959147173.html&docid=FahB3lcm3XrfKM&w=500&h=500&q=honey%20in%20a%20box%20images&ved=2ahUKEwjBi-rQ68f-AhUL-nMBHVIfAhIQMygKegUIARCLAg"
+                    imageUrl: "https://res.cloudinary.com/foodsupplychain/image/upload/v1682576240/IMG-20230427-WA0010_nuuvtu.jpg"
                 },
             ];
 
@@ -266,13 +266,9 @@ export class FoodContract extends Contract {
         id: Product["id"],
         quantity: Product["quantity"],
         price: Product["price"],
-<<<<<<< HEAD
         lat: number,
         lng: number,
         // location: Product["location"],
-=======
-        { current, prev }: Product["location"],
->>>>>>> 7400f8e34c3f7e1188bfdfc57a84540039c3dc88
         actor: Product["actor"],
         imageUrl: Product["imageUrl"]
     ) {
