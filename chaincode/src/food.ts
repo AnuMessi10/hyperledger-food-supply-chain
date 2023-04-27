@@ -36,25 +36,25 @@ export class FoodContract extends Contract {
                     location: {
                         prev: [
                             {
-                                lat: -83.894396,
-                                lng: 82.114916
+                                lat: 13.082680,
+                                lng: 80.270721 // Chennai
                             },
                             {
-                                lat: -63.158436,
-                                lng: -49.244897
+                                lat: 11.664325,
+                                lng: 78.146011 // Tamil Nadu agricultural area
                             },
                             {
-                                lat: -15.302023,
-                                lng: 51.650272
+                                lat: 20.593683,
+                                lng: 78.962883 // Maharashtra agricultural area
                             },
                             {
-                                lat: -39.282164,
-                                lng: 20.577194
+                                lat: 19.076090,
+                                lng: 72.877426 // Mumbai
                             },
                         ],
                         current: {
-                            lat: -43.994734,
-                            lng: 96.786389
+                            lat: 22.572646,
+                            lng: 88.363895 // Kolkata
                         }
                     },
                     actor: "CONSUMER",
@@ -67,25 +67,25 @@ export class FoodContract extends Contract {
                     location: {
                         prev: [
                             {
-                                "lat": -82.834558,
-                                "lng": 150.150364
+                                lat: 28.704060,
+                                lng: 77.102493 // Delhi
                             },
                             {
-                                "lat": -69.670209,
-                                "lng": -75.32923
+                                lat: 28.207609,
+                                lng: 76.826957 // Haryana agricultural area
                             },
                             {
-                                "lat": 83.21527,
-                                "lng": 107.266407
+                                lat: 12.971599,
+                                lng: 77.594566 // Bangalore
                             },
                             {
-                                "lat": 76.761472,
-                                "lng": 66.06163
+                                lat: 11.664325,
+                                lng: 78.146011 // Tamil Nadu agricultural area
                             },
                         ],
                         current: {
-                            lat: 20.0,
-                            lng: -30.0,
+                            lat: 17.385044,
+                            lng: 78.486671 // Hyderabad
                         }
                     },
 
@@ -99,21 +99,21 @@ export class FoodContract extends Contract {
                     location: {
                         prev: [
                             {
-                                "lat": 30.373,
-                                "lng": 166.929666
+                                lat: 22.986757,
+                                lng: 87.854976 // West Bengal agricultural area
                             },
                             {
-                                "lat": -19.491888,
-                                "lng": -151.619847
+                                lat: 19.076090,
+                                lng: 72.877426 // Mumbai
                             },
                             {
-                                "lat": -47.411472,
-                                "lng": 22.249917
+                                lat: 21.170240,
+                                lng: 72.831062 // Gujarat agricultural area
                             },
                         ],
                         current: {
-                            lat: 50.0,
-                            lng: 10.1,
+                            lat: 28.704060,
+                            lng: 77.102493 // Delhi
                         }
                     },
 
@@ -163,21 +163,25 @@ export class FoodContract extends Contract {
                     location: {
                         prev: [
                             {
-                                lat: 45.894396,
-                                lng: 42.114916
+                                lat: 19.076090,
+                                lng: 72.877426 // Mumbai
                             },
                             {
-                                lat: 63.158436,
-                                lng: -29.244897
+                                lat: 20.593683,
+                                lng: 78.962883 // Maharashtra agricultural area
                             },
                             {
-                                lat: 15.302023,
-                                lng: 69.650272
+                                lat: 17.385044,
+                                lng: 78.486671 // Hyderabad
+                            },
+                            {
+                                lat: 16.506174,
+                                lng: 80.648015 // Andhra Pradesh agricultural area
                             },
                         ],
                         current: {
-                            lat: 73.994734,
-                            lng: 69.786389
+                            lat: 13.082680,
+                            lng: 80.270721 // Chennai
                         }
                     },
                     actor: "CONSUMER",
@@ -262,9 +266,13 @@ export class FoodContract extends Contract {
         id: Product["id"],
         quantity: Product["quantity"],
         price: Product["price"],
+<<<<<<< HEAD
         lat: number,
         lng: number,
         // location: Product["location"],
+=======
+        { current, prev }: Product["location"],
+>>>>>>> 7400f8e34c3f7e1188bfdfc57a84540039c3dc88
         actor: Product["actor"],
         imageUrl: Product["imageUrl"]
     ) {
@@ -358,7 +366,7 @@ export class FoodContract extends Contract {
         quantity: Product["quantity"],
         price: Product["price"],
         name: Product["name"],
-        location: Product["location"],
+        { current, prev }: Product["location"],
         actor: Product["actor"],
         imageUrl: Product["imageUrl"]
     ): Promise<void> {
@@ -376,7 +384,10 @@ export class FoodContract extends Contract {
             quantity,
             price,
             name,
-            location,
+            location: {
+                current,
+                prev
+            },
             actor,
             imageUrl
         };

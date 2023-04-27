@@ -31,8 +31,16 @@ const AuthStack = () => {
             component={Login}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="OTP" component={OTP} />
-          <Stack.Screen name="Register" component={Registration} />
+          <Stack.Screen
+            name="OTP"
+            component={OTP}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Registration}
+            options={{headerShown: false}}
+          />
           <Stack.Screen
             name="Landing"
             component={Landing}
@@ -40,12 +48,36 @@ const AuthStack = () => {
           />
 
           {/* Product */}
-          <Stack.Screen name="CreateProduct" component={CreateProduct} />
-          <Stack.Screen name="QueryProduct" component={QueryProduct} />
-          <Stack.Screen name="ProductDetails" component={ProductDetails} />
-          <Stack.Screen name="ShipProduct" component={ShipProduct} />
-          <Stack.Screen name="ProductLocation" component={ProductLocation} />
-          <Stack.Screen name="AllProducts" component={AllProducts} />
+          <Stack.Screen
+            name="CreateProduct"
+            component={CreateProduct}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="QueryProduct"
+            component={QueryProduct}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ProductDetails"
+            component={ProductDetails}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ShipProduct"
+            component={ShipProduct}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ProductLocation"
+            component={ProductLocation}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="AllProducts"
+            component={AllProducts}
+            options={{headerShown: false}}
+          />
 
           {/* <Stack.Screen name="TestingProduct" component={TestingProduct} /> */}
         </Stack.Navigator>

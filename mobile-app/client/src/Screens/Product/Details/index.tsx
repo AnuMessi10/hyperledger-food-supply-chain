@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {StyleSheet, View} from 'react-native';
 import React, {FC, useContext} from 'react';
-import {Box, Button, IconButton, Input, SearchIcon, Text} from 'native-base';
+import {Box, Button, Text} from 'native-base';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 import ProductContext from '../../../Navigation/ProductContext';
 
@@ -11,25 +11,10 @@ export interface ProductDetailsProps {
 
 const ProductDetails: FC<ProductDetailsProps> = ({navigation}) => {
   const {product} = useContext(ProductContext);
-  const {name, price, quantity} = product;
+  const {name, price, quantity, imageUrl} = product;
 
   return (
     <View>
-      <View style={styles.search}>
-        <View style={{flex: 0.7, marginRight: 20}}>
-          <Input placeholder="Default Input" borderRadius={'lg'} />
-        </View>
-        <View
-          style={{flex: 0.15, alignItems: 'center', justifyContent: 'center'}}>
-          <IconButton
-            variant={'outline'}
-            icon={<SearchIcon />}
-            onPress={() => {
-              console.log('hello');
-            }}
-          />
-        </View>
-      </View>
       <Box style={styles.detailsContainer} bgColor={'blueGray.200'}>
         <Text bold fontSize="4xl" marginTop={'3.5'} textAlign={'center'}>
           Details
@@ -99,7 +84,6 @@ const ProductDetails: FC<ProductDetailsProps> = ({navigation}) => {
             </View>
           </View>
         </Box>
-
         <Button
           style={styles.Button}
           variant="outline"

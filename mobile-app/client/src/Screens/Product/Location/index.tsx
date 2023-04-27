@@ -2,8 +2,9 @@ import {StyleSheet, View} from 'react-native';
 import React, {FC, useContext} from 'react';
 import {Box, Button, Text} from 'native-base';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker, Polyline} from 'react-native-maps';
 import ProductContext from '../../../Navigation/ProductContext';
+import {Location} from '../../../Models/Food/@types';
 
 export interface ProductionLocationProps {
   navigation: NativeStackNavigationHelpers;
@@ -22,21 +23,65 @@ const ProductionLocation: FC<ProductionLocationProps> = ({navigation}) => {
           borderRadius={'lg'}
           bgColor={'blueGray.300'}
           paddingY={2}>
-          <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: product.location.lat,
-              longitude: product.location.lng,
-              latitudeDelta: 5,
-              longitudeDelta: 5,
-            }}>
-            <Marker
-              coordinate={{
-                latitude: product.location.lat,
-                longitude: product.location.lng,
-              }}
-            />
-          </MapView>
+          {Array.isArray(product.location.prev) ? (
+            <MapView
+              style={styles.map}
+              maxZoomLevel={5}
+              initialRegion={{
+                latitude: product.location.current.lat,
+                longitude: product.location.current.lng,
+                latitudeDelta: 5,
+                longitudeDelta: 5,
+              }}>
+              <Polyline
+                coordinates={[
+                  ...product.location.prev,
+                  product.location.current,
+                ].map((coord: Location) => {
+                  return {
+                    latitude: coord.lat,
+                    longitude: coord.lng,
+                  };
+                })}
+                strokeColor="#000"
+                strokeWidth={3}
+                lineCap="round"
+              />
+              {product.location.prev.map((coord: Location, i: number) => {
+                return (
+                  <Marker
+                    key={i}
+                    coordinate={{
+                      latitude: coord.lat,
+                      longitude: coord.lng,
+                    }}
+                  />
+                );
+              })}
+              <Marker
+                coordinate={{
+                  latitude: product.location.current.lat,
+                  longitude: product.location.current.lng,
+                }}
+              />
+            </MapView>
+          ) : (
+            <MapView
+              style={styles.map}
+              initialRegion={{
+                latitude: product.location.current.lat,
+                longitude: product.location.current.lng,
+                latitudeDelta: 5,
+                longitudeDelta: 5,
+              }}>
+              <Marker
+                coordinate={{
+                  latitude: product.location.current.lat,
+                  longitude: product.location.current.lng,
+                }}
+              />
+            </MapView>
+          )}
         </Box>
         <Button
           style={styles.Button}

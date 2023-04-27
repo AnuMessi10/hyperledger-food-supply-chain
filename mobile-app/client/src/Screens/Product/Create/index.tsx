@@ -1,12 +1,11 @@
 import {View, PermissionsAndroid, StyleSheet, Alert} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {
   Box,
   Button,
   Center,
   FormControl,
-  Icon,
   Image,
   Input,
   ScrollView,
@@ -21,6 +20,7 @@ import {REQUIRED_FIELD_MESSAGE} from '../../../Constants';
 import FoodModel from '../../../Models/Food';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import {Location} from '../../../Models/Food/@types';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export interface CreateProductProps {
   navigation: NativeStackNavigationHelpers;
@@ -43,7 +43,7 @@ const createProductSchema = object({
   ),
 });
 
-const CreateProduct: FC<CreateProductProps> = () => {
+const CreateProduct: FC<CreateProductProps> = ({navigation}) => {
   const [cloudinaryUrl, setCloudinaryUrl] = useState<string>();
 
   const getProductImage = async (
@@ -138,10 +138,18 @@ const CreateProduct: FC<CreateProductProps> = () => {
   const handleCreate = async (values: any) => {
     await FoodModel.createProduct({
       ...values,
+      location: {
+        current: {
+          lat: values.location.lat,
+          lng: values.location.lng,
+        },
+      },
       imageUrl: cloudinaryUrl,
       id: Math.floor(Math.random() * 1000),
       actor: 'PRODUCER',
     });
+    Alert.alert('Product created successfully!');
+    navigation.navigate('ProductDetails');
   };
 
   return (
@@ -304,7 +312,11 @@ const CreateProduct: FC<CreateProductProps> = () => {
                                       'gallery',
                                     )
                                   }>
-                                  From Gallery
+                                  <Icon
+                                    name="folder-open"
+                                    color={'white'}
+                                    size={25}
+                                  />
                                 </Button>
                               </Box>
                               <Box>
@@ -316,7 +328,11 @@ const CreateProduct: FC<CreateProductProps> = () => {
                                       'camera',
                                     )
                                   }>
-                                  From Camera
+                                  <Icon
+                                    name="camera"
+                                    color={'white'}
+                                    size={25}
+                                  />
                                 </Button>
                               </Box>
                             </Box>

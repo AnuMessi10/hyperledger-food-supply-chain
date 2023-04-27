@@ -1,16 +1,22 @@
 import {createContext} from 'react';
-import {Product} from '../Models/Food';
+import {Food} from '../Models/Food';
 
 const ProductContext = createContext<{
-  product: Product;
-  setProduct: React.Dispatch<React.SetStateAction<Product>>;
+  product: Food;
+  setProduct: React.Dispatch<React.SetStateAction<Food>>;
 }>({
   product: {
     name: '',
     price: 0,
     location: {
-      lat: 0,
-      lng: 0,
+      prev: {
+        lat: 0,
+        lng: 0,
+      },
+      current: {
+        lat: 0,
+        lng: 0,
+      },
     },
     quantity: '',
     id: '',

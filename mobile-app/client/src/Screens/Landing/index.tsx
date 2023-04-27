@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
-import {Text} from 'native-base';
+import {Box, Image, Text} from 'native-base';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 
 export interface ILandingProps {
@@ -10,6 +10,16 @@ export interface ILandingProps {
 const Landing: FC<ILandingProps> = ({navigation}) => {
   return (
     <View style={styles.root}>
+      <Box>
+        <Image
+          source={{
+            uri: 'https://res.cloudinary.com/foodsupplychain/image/upload/v1682531163/LandingLogo_lll8gn.png',
+          }}
+          alt="landing-logo"
+          height={300}
+          width={375}
+        />
+      </Box>
       <Text style={styles.title}>Welcome to FoodNet!</Text>
       <Text style={styles.subtitle}>
         A platform to connect consumers, producers, and retailers.
