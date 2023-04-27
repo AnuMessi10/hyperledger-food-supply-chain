@@ -15,7 +15,8 @@ const createProduct = async (req: any, res: Response, next: NextFunction) => {
     id,
     quantity,
     price,
-    location,
+    location.current.lat,
+    location.current.lng,
     actor,
     imageUrl
   );

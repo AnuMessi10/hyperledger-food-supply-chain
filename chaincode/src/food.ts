@@ -262,7 +262,9 @@ export class FoodContract extends Contract {
         id: Product["id"],
         quantity: Product["quantity"],
         price: Product["price"],
-        location: Product["location"],
+        lat: number,
+        lng: number,
+        // location: Product["location"],
         actor: Product["actor"],
         imageUrl: Product["imageUrl"]
     ) {
@@ -278,7 +280,12 @@ export class FoodContract extends Contract {
             name,
             quantity,
             price,
-            location,
+            location: {
+                current: {
+                    lat, lng
+                }
+
+            },
             actor,
             imageUrl,
         };
