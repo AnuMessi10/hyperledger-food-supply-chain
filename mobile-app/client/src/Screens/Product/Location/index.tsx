@@ -12,6 +12,7 @@ export interface ProductionLocationProps {
 
 const ProductionLocation: FC<ProductionLocationProps> = ({navigation}) => {
   const {product} = useContext(ProductContext);
+
   return (
     <View>
       <Box style={styles.detailsContainer} bgColor={'blueGray.200'}>
@@ -23,7 +24,7 @@ const ProductionLocation: FC<ProductionLocationProps> = ({navigation}) => {
           borderRadius={'lg'}
           bgColor={'blueGray.300'}
           paddingY={2}>
-          {Array.isArray(product.location.prev) ? (
+          {!!product.location.prev && Array.isArray(product.location.prev) ? (
             <MapView
               style={styles.map}
               maxZoomLevel={5}
@@ -69,15 +70,15 @@ const ProductionLocation: FC<ProductionLocationProps> = ({navigation}) => {
             <MapView
               style={styles.map}
               initialRegion={{
-                latitude: product.location.current.lat,
-                longitude: product.location.current.lng,
+                latitude: Number(product.location.current.lat),
+                longitude: Number(product.location.current.lng),
                 latitudeDelta: 5,
                 longitudeDelta: 5,
               }}>
               <Marker
                 coordinate={{
-                  latitude: product.location.current.lat,
-                  longitude: product.location.current.lng,
+                  latitude: Number(product.location.current.lat),
+                  longitude: Number(product.location.current.lng),
                 }}
               />
             </MapView>
