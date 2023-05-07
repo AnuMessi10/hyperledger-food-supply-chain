@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {StyleSheet, View} from 'react-native';
 import React, {FC, useContext} from 'react';
-import {Box, Button, Text} from 'native-base';
+import {Box, Button, Center, Image, Text} from 'native-base';
 import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 import ProductContext from '../../../Navigation/ProductContext';
 
@@ -84,6 +84,16 @@ const ProductDetails: FC<ProductDetailsProps> = ({navigation}) => {
             </View>
           </View>
         </Box>
+        <Center>
+          <Box>
+            <Image
+              source={{uri: imageUrl}}
+              alt="food-product"
+              height={200}
+              width={200}
+            />
+          </Box>
+        </Center>
         <Button
           style={styles.Button}
           variant="outline"

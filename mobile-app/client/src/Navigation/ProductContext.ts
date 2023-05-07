@@ -1,5 +1,5 @@
 import {createContext} from 'react';
-import {Food} from '../Models/Food';
+import Food from '../Models/Food';
 
 const ProductContext = createContext<{
   product: Food;
@@ -21,6 +21,7 @@ const ProductContext = createContext<{
     quantity: '',
     id: '',
     actor: 'PRODUCER',
+    imageUrl: '',
   },
   setProduct: () => {},
 });
